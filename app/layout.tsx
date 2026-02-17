@@ -21,9 +21,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Aru365 – Everything Aruba. 365 Days a Year.",
+  title: "Aru365 – Best Tours & Excursions in Aruba | Sunset Cruises, ATV, Snorkeling",
   description:
-    "The ultimate platform for tours and restaurants in Aruba. Partner with us for SEO, social promotion, and direct bookings.",
+    "Aruba’s dedicated platform for discovering the best tours and excursions. Find, compare, and book snorkeling tours, sunset cruises, ATV adventures, and more — all in one place. Launching soon.",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",

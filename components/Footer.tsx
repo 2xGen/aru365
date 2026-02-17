@@ -20,7 +20,7 @@ export function Footer() {
           </div>
           <div className="pt-6 border-t border-slate-700/80 w-full">
             <p className="text-slate-400 text-sm leading-relaxed">
-              Aru365 is owned and operated by{" "}
+              Owned and operated by{" "}
               <Link
                 href="/2xgen"
                 className="text-aru-cyan hover:text-aru-cyan-dark font-medium transition-colors underline underline-offset-2"

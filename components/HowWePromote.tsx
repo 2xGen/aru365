@@ -4,7 +4,7 @@ const benefits = [
   {
     title: "SEO & Content Exposure",
     description:
-      "Get discovered by travelers searching for Aruba. We refine and promote your listing so you rank where it matters.",
+      "We create optimized tour category pages and comparison guides targeting high-intent searches like “best tours in Aruba,” “snorkeling tours,” “ATV tours Aruba,” and “sunset cruises Aruba.”",
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -15,9 +15,9 @@ const benefits = [
     border: "border-aru-orange/20",
   },
   {
-    title: "Social Media Promotion",
+    title: "Strategic Placement",
     description:
-      "We feature partners on our channels and in travel content, reaching visitors before they land on the island.",
+      "Your tour appears in curated categories, featured recommendations, and high-visibility comparison pages across the site.",
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l7.5-4.314m-7.5 4.314l7.5 4.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186m0 0l-7.5-4.314m7.5 4.314l-7.5-4.314" />
@@ -28,12 +28,12 @@ const benefits = [
     border: "border-aru-cyan/20",
   },
   {
-    title: "Newsletter Marketing",
+    title: "Direct Booking Integration",
     description:
-      "Included in our subscriber updates and trip guides so your venue is top of mind when travelers plan.",
+      "We drive bookings through your Viator listings or approved booking channels—exposure without added complexity.",
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
       </svg>
     ),
     color: "text-aru-orange",
@@ -41,12 +41,12 @@ const benefits = [
     border: "border-aru-orange/20",
   },
   {
-    title: "Affiliate & Direct Booking",
+    title: "Email & Trip Planning Promotion",
     description:
-      "Integrate with us for referrals and optional direct booking—you keep more, pay less in fees.",
+      "Your tours are featured in curated itineraries, planning guides, and subscriber updates—keeping you top of mind during trip planning.",
     icon: (
       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
       </svg>
     ),
     color: "text-aru-cyan",
@@ -65,16 +65,22 @@ export function HowWePromote() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           id="how-we-promote-heading"
-          className="font-display font-bold text-3xl sm:text-4xl text-slate-900 text-center mb-4"
+          className="font-display font-bold text-3xl sm:text-4xl text-slate-900 text-center mb-2"
           style={{ fontFamily: "var(--font-display), system-ui, sans-serif" }}
         >
-          How We <span className="text-aru-orange">Promote</span> You
+          Partner <span className="text-aru-orange">With Us</span>
         </h2>
-        <p className="text-slate-600 text-center max-w-3xl mx-auto mb-6 text-lg leading-relaxed">
-          Aru365 is built on the success of <strong className="text-slate-800">ArubaBuddies</strong>. With 4+ years of experience and more than 10,000 monthly visitors, we connect Aruba businesses with travelers ready to book. Aru365 is the next chapter—your go-to platform for Aruba, 365 days a year.
+        <h3 className="font-display font-semibold text-xl sm:text-2xl text-slate-800 text-center mb-4" style={{ fontFamily: "var(--font-display), system-ui, sans-serif" }}>
+          How We Promote Tour Businesses
+        </h3>
+        <p className="text-slate-600 text-center max-w-3xl mx-auto mb-4 text-lg leading-relaxed">
+          Aru365 is built on the success of <strong className="text-slate-800">ArubaBuddies</strong>. With 4+ years of experience and more than 10,000 monthly visitors, we understand what travelers search for—and what they book.
         </p>
-        <p className="text-slate-600 text-center max-w-2xl mx-auto mb-14">
-          Here’s how we get you found and booked.
+        <p className="text-slate-600 text-center max-w-3xl mx-auto mb-14">
+          Aru365 is the next evolution: a platform fully focused on <strong className="text-slate-800">tours and excursions in Aruba</strong>.
+        </p>
+        <p className="text-slate-600 text-center max-w-2xl mx-auto mb-10 font-medium">
+          Here’s how we help you get found and booked:
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {benefits.map((item, i) => (
@@ -83,7 +89,7 @@ export function HowWePromote() {
               className={`${item.bg} border ${item.border} rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200`}
             >
               <div className={`${item.color} mb-4`}>{item.icon}</div>
-              <h3 className="font-semibold text-slate-900 text-lg mb-2">{item.title}</h3>
+              <h4 className="font-semibold text-slate-900 text-lg mb-2">{item.title}</h4>
               <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
             </div>
           ))}

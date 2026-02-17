@@ -1,27 +1,43 @@
 "use client";
 
-export function ContactForm() {
+const highlights = [
+  "Aruba tours",
+  "Excursions in Aruba",
+  "Snorkeling tours",
+  "ATV and off-road adventures",
+  "Sunset cruises",
+  "Private and luxury experiences",
+];
+
+export function LaunchingSoon() {
   return (
     <section
       id="contact"
-      className="py-20 lg:py-28 bg-slate-50 bg-hero-gradient"
-      aria-labelledby="contact-heading"
+      className="py-20 lg:py-28 bg-white border-t border-slate-200"
+      aria-labelledby="launching-heading"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2
-          id="contact-heading"
+          id="launching-heading"
           className="font-display font-bold text-3xl sm:text-4xl text-slate-900 text-center mb-4"
           style={{ fontFamily: "var(--font-display), system-ui, sans-serif" }}
         >
-          Partner <span className="text-aru-orange">With Us</span>
+          <span className="text-aru-cyan">Launching</span> Soon
         </h2>
-        <p className="text-slate-600 text-center max-w-2xl mx-auto mb-4">
-          Tell us about your tour business. We’ll get back to you shortly.
+        <p className="text-slate-600 text-center max-w-2xl mx-auto mb-10">
+          We’re currently finalizing tour categories, comparison guides, and structured experience pages. Aru365 will soon become the most complete and focused destination for:
         </p>
-        <p className="text-slate-700 text-center max-w-2xl mx-auto mb-10 font-medium">
-          Join us early and be part of Aru365—the next generation of ArubaBuddies, now fully focused on tours and experiences.
+        <ul className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto mb-14">
+          {highlights.map((item, i) => (
+            <li key={i} className="text-slate-600 font-medium">
+              {item}
+            </li>
+          ))}
+        </ul>
+        <p className="font-display font-semibold text-slate-800 text-center text-lg mb-8" style={{ fontFamily: "var(--font-display), system-ui, sans-serif" }}>
+          Everything Aruba. 365 Days a Year.
         </p>
-        <p className="text-slate-600 text-center text-sm font-semibold mb-4">Contact</p>
+        <p className="text-slate-500 text-center text-sm mb-4">Questions? Get in touch.</p>
         <div className="flex flex-wrap justify-center gap-4">
           <a
             href="mailto:matthijs@2xgen.com"

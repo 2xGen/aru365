@@ -11,9 +11,9 @@ export function Hero() {
         <div className="max-w-4xl mx-auto text-center">
           <span
             className="inline-block px-4 py-1.5 rounded-full text-sm font-medium tracking-wider uppercase text-slate-600 bg-slate-200/80 border border-slate-300/60 animate-fade-in"
-            aria-label="Coming soon"
+            aria-label="Launching soon"
           >
-            Coming Soon
+            Launching Soon
           </span>
           <h1
             className="mt-4 font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-slate-900 tracking-tight animate-fade-in"
@@ -36,20 +36,17 @@ export function Hero() {
             </span>
           </h1>
           <p className="mt-6 text-xl sm:text-xl text-slate-600 max-w-2xl mx-auto animate-fade-in [animation-delay:0.05s] opacity-0 [animation-fill-mode:forwards]">
-            The ultimate platform for tours and restaurants in Aruba.
+            The Best Tours & Excursions in Aruba — Launching Soon
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in [animation-delay:0.1s] opacity-0 [animation-fill-mode:forwards]">
+          <p className="mt-3 text-base sm:text-lg text-slate-500 max-w-2xl mx-auto animate-fade-in [animation-delay:0.08s] opacity-0 [animation-fill-mode:forwards]">
+            Aru365 is launching soon as Aruba’s dedicated platform for discovering the best tours and excursions. We’re building a focused experience to help travelers find, compare, and book the most popular Aruba tours — all in one place.
+          </p>
+          <div className="mt-10 animate-fade-in [animation-delay:0.1s] opacity-0 [animation-fill-mode:forwards]">
             <a
-              href="#contact"
+              href="#tours"
               className="btn-lift inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-white bg-aru-orange hover:bg-aru-orange-dark shadow-lg shadow-aru-orange/25 min-w-[200px]"
             >
-              Partner with Us
-            </a>
-            <a
-              href="#contact"
-              className="btn-lift inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-aru-cyan bg-white border-2 border-aru-cyan hover:bg-aru-cyan hover:text-white min-w-[200px]"
-            >
-              Enable Direct Bookings
+              See What’s Coming
             </a>
           </div>
         </div>
