@@ -22,6 +22,16 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+### Booking / Viator affiliate
+
+All "See options & book" links go to Viator Aruba. To use your affiliate link, set in `.env.local`:
+
+```bash
+NEXT_PUBLIC_VIATOR_ARUBA_URL=https://www.viator.com/...  # Your link from Viator Partner Selector
+```
+
+If unset, links use the default Viator Aruba destination page.
+
 ## Build
 
 ```bash

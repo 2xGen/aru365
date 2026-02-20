@@ -1,0 +1,170 @@
+import { notFound } from "next/navigation";
+import {
+  getTourListing,
+  getTourListingsByCategory,
+  categorySlugsWithListings,
+} from "@/data/listings";
+import { getGuide, getGuideSlugsByCategory, getRelatedGuides } from "@/data/guides";
+import { getPillarBySlug } from "@/data/pillars";
+import { fetchProductsBulk, fetchProductDetails } from "@/lib/viator-api";
+import { TourListingTemplate } from "@/components/TourListingTemplate";
+import { GuideTemplate } from "@/components/GuideTemplate";
+import { Footer } from "@/components/Footer";
+import type { Metadata } from "next";
+
+const SITE_URL = "https://aru365.com";
+const DEFAULT_OG_IMAGE =
+  "https://soaacpusdhyxwucjhhpy.supabase.co/storage/v1/object/public/aru365/aru365%20tours%20and%20excursions%20in%20aruba.png";
+
+type Props = {
+  params: Promise<{ slug: string; tourSlug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug: categorySlug, tourSlug } = await params;
+  const pillar = getPillarBySlug(categorySlug);
+  const categoryTitle = pillar?.title ?? categorySlug;
+  const pageUrl = `${SITE_URL}/${categorySlug}/${tourSlug}`;
+  const ogImages = [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Aru365 – Tours and excursions in Aruba" }];
+
+  const guide = getGuide(categorySlug, tourSlug);
+  if (guide) {
+    const title = `${guide.title} | ${categoryTitle} | Aru365`;
+    return {
+      title,
+      description: guide.description,
+      openGraph: { title, description: guide.description, url: pageUrl, images: ogImages },
+      alternates: { canonical: pageUrl },
+    };
+  }
+
+  const listing = getTourListing(categorySlug, tourSlug);
+  if (!listing) return {};
+  const displayTitle = listing.seoTitle ?? `${listing.operator} — ${listing.angle}`;
+  const title = `${displayTitle} | ${categoryTitle} | Aru365`;
+  return {
+    title,
+    description: listing.metaDescription,
+    openGraph: { title, description: listing.metaDescription, url: pageUrl, images: ogImages },
+    alternates: { canonical: pageUrl },
+  };
+}
+
+export async function generateStaticParams() {
+  const params: { slug: string; tourSlug: string }[] = [];
+  for (const categorySlug of categorySlugsWithListings) {
+    const listings = getTourListingsByCategory(categorySlug);
+    for (const listing of listings) {
+      params.push({ slug: categorySlug, tourSlug: listing.slug });
+    }
+    const guideSlugs = getGuideSlugsByCategory(categorySlug);
+    for (const guideSlug of guideSlugs) {
+      params.push({ slug: categorySlug, tourSlug: guideSlug });
+    }
+  }
+  return params;
+}
+
+export default async function CategorySubPage({ params }: Props) {
+  const { slug: categorySlug, tourSlug } = await params;
+
+  const pillar = getPillarBySlug(categorySlug);
+  const categoryTitle = pillar?.title ?? categorySlug;
+  const categoryHref = `/${categorySlug}`;
+
+  // Guide page (e.g. /catamaran-cruises-in-aruba/morning-cruises)
+  const guide = getGuide(categorySlug, tourSlug);
+  if (guide) {
+    const productCodesToFetch: string[] = [];
+    for (const pick of guide.picks) {
+      const listing = getTourListing(categorySlug, pick.slug);
+      if (listing && !productCodesToFetch.includes(listing.productCode)) {
+        productCodesToFetch.push(listing.productCode);
+      }
+    }
+
+    const picksWithTours = guide.picks.map((pick) => ({
+      pick,
+      tour: null as Awaited<ReturnType<typeof fetchProductsBulk>>[number] | null,
+    }));
+
+    if (productCodesToFetch.length > 0) {
+      try {
+        const products = await fetchProductsBulk(productCodesToFetch);
+        const codeToProduct = new Map(products.map((p) => [p.productCode, p]));
+        for (let i = 0; i < guide.picks.length; i++) {
+          const listing = getTourListing(categorySlug, guide.picks[i].slug);
+          picksWithTours[i].tour = listing ? (codeToProduct.get(listing.productCode) ?? null) : null;
+        }
+      } catch {
+        // Use placeholder when API fails
+      }
+    }
+
+    const relatedGuides = getRelatedGuides(categorySlug, guide.slug, 3).map((g) => ({
+      label: g.title,
+      href: `/${categorySlug}/${g.slug}`,
+    }));
+
+    return (
+      <>
+        <GuideTemplate
+          guide={guide}
+          categoryTitle={categoryTitle}
+          categoryHref={categoryHref}
+          picksWithTours={picksWithTours}
+          relatedGuides={relatedGuides}
+        />
+        <Footer />
+      </>
+    );
+  }
+
+  // Tour listing page
+  if (!categorySlugsWithListings.includes(categorySlug)) notFound();
+  const listing = getTourListing(categorySlug, tourSlug);
+  if (!listing) notFound();
+
+  const allListings = getTourListingsByCategory(categorySlug);
+  const relatedListingsRaw = allListings
+    .filter((l) => l.productCode !== listing.productCode)
+    .slice(0, 3);
+
+  let liveData: Awaited<ReturnType<typeof fetchProductsBulk>>[number] | null = null;
+  const relatedProductCodes = relatedListingsRaw.map((l) => l.productCode);
+  let relatedProducts: Awaited<ReturnType<typeof fetchProductsBulk>> = [];
+  let viatorItinerary: Awaited<ReturnType<typeof fetchProductDetails>> = null;
+
+  try {
+    const [mainProducts, related, details] = await Promise.all([
+      fetchProductsBulk([listing.productCode]),
+      relatedProductCodes.length > 0 ? fetchProductsBulk(relatedProductCodes) : Promise.resolve([]),
+      fetchProductDetails(listing.productCode),
+    ]);
+    liveData = mainProducts[0] ?? null;
+    relatedProducts = related;
+    viatorItinerary = details;
+  } catch {
+    // Use placeholders when API fails; later a crawl job can refresh price/rating
+  }
+
+  const codeToImage = new Map(relatedProducts.map((p) => [p.productCode, p.imageUrl ?? null]));
+  const relatedListings = relatedListingsRaw.map((l) => ({
+    listing: l,
+    imageUrl: codeToImage.get(l.productCode) ?? null,
+  }));
+
+  return (
+    <>
+      <TourListingTemplate
+        listing={listing}
+        categoryTitle={categoryTitle}
+        categoryHref={categoryHref}
+        liveData={liveData ?? undefined}
+        relatedListings={relatedListings}
+        viatorItinerary={viatorItinerary?.itinerary ?? undefined}
+      />
+      <Footer />
+    </>
+  );
+}

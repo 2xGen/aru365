@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, DM_Sans, Playfair_Display } from "next/font/google";
+import { Header } from "@/components/Header";
+import { CookieConsentProvider } from "@/components/CookieConsentContext";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -20,14 +22,67 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const SITE_URL = "https://aru365.com";
+const DEFAULT_OG_IMAGE =
+  "https://soaacpusdhyxwucjhhpy.supabase.co/storage/v1/object/public/aru365/aru365%20tours%20and%20excursions%20in%20aruba.png";
+const defaultTitle = "Aru365 – Book Best Tours in Aruba | Catamaran, Snorkeling, ATV, Sunset Cruises";
+const defaultDescription =
+  "Aruba's dedicated platform for booking the best tours and excursions. Find, compare, and book snorkeling tours, sunset cruises, ATV adventures, and more — all in one place.";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Aru365",
+  url: SITE_URL,
+  logo: DEFAULT_OG_IMAGE,
+  description: defaultDescription,
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Aru365",
+  url: SITE_URL,
+  description: defaultDescription,
+  publisher: { "@type": "Organization", name: "Aru365", url: SITE_URL },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/best-tours-in-aruba?q={search_term_string}` },
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export const metadata: Metadata = {
-  title: "Aru365 – Best Tours & Excursions in Aruba | Sunset Cruises, ATV, Snorkeling",
-  description:
-    "Aruba’s dedicated platform for discovering the best tours and excursions. Find, compare, and book snorkeling tours, sunset cruises, ATV adventures, and more — all in one place. Launching soon.",
+  title: defaultTitle,
+  description: defaultDescription,
+  metadataBase: new URL(SITE_URL),
+  robots: { index: true, follow: true },
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
     apple: "/icon.svg",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en",
+    url: SITE_URL,
+    siteName: "Aru365",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Aru365 – Tours and excursions in Aruba",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 
@@ -38,7 +93,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} ${dmSans.variable} ${playfair.variable}`}>
-      <body className="font-sans min-h-screen">{children}</body>
+      <body className="font-sans min-h-screen">
+        <CookieConsentProvider>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          />
+          <Header />
+          {children}
+        </CookieConsentProvider>
+      </body>
     </html>
   );
 }

@@ -21,24 +21,28 @@ const config: Config = {
         display: ["var(--font-display)", "var(--font-geist-sans)", "system-ui"],
       },
       animation: {
-        "fade-in": "fadeIn 0.35s ease-out forwards",
-        "slide-up": "slideUp 0.35s ease-out forwards",
+        "fade-in": "fadeIn 0.4s ease-out forwards",
+        "fade-in-up": "fadeInUp 0.5s ease-out forwards",
+        "slide-up": "slideUp 0.4s ease-out forwards",
+        "scale-in": "scaleIn 0.35s ease-out forwards",
       },
       keyframes: {
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
-        slideUp: {
-          "0%": { opacity: "0", transform: "translateY(8px)" },
+        fadeInUp: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-      },
-      backgroundImage: {
-        "hero-gradient":
-          "linear-gradient(135deg, rgba(255,140,0,0.08) 0%, rgba(0,206,209,0.08) 50%, transparent 100%)",
-        "section-gradient":
-          "linear-gradient(180deg, transparent 0%, rgba(0,206,209,0.04) 100%)",
+        slideUp: {
+          "0%": { opacity: "0", transform: "translateY(12px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        scaleIn: {
+          "0%": { opacity: "0", transform: "scale(0.96)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
       },
     },
   },

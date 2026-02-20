@@ -1,10 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+const DEFAULT_OG_IMAGE =
+  "https://soaacpusdhyxwucjhhpy.supabase.co/storage/v1/object/public/aru365/aru365%20tours%20and%20excursions%20in%20aruba.png";
+
 export const metadata: Metadata = {
   title: "2xGen LLC – Next-gen digital platforms",
   description:
     "2xGen builds and operates digital platforms: TopTours.ai, ArubaBuddies, FactuurBaas, OneHappyFinance, AruList, and more.",
+  openGraph: {
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Aru365 – Tours and excursions in Aruba" }],
+  },
 };
 
 const platforms = [
