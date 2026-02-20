@@ -8,6 +8,7 @@ import { pillarProductCodes } from "@/data/pillarProducts";
 import { getListingByProductCode } from "@/data/listings";
 import { getPillarBySlug } from "@/data/pillars";
 import { featuredTours } from "@/data/featuredTours";
+import { getStaticProductSummaries } from "@/data/staticProductSummaries";
 import { fetchProductsBulk } from "@/lib/viator-api";
 import type { ViatorProductSummary } from "@/lib/viator-api";
 import { getCategoryBookUrl } from "@/lib/booking";
@@ -89,28 +90,49 @@ export default async function BestToursPage() {
     })
     .filter((x): x is NonNullable<typeof x> => x !== null);
 
-  // Fallback to hardcoded featured tours when API is unavailable (no key or failure)
+  // Fallback: use static snapshot (with images) when API is disabled or fails; else featuredTours
   if (topPicks.length === 0) {
-    const fallbackProduct = (ft: (typeof featuredTours)[number]): ViatorProductSummary => ({
-      productCode: ft.id,
-      title: ft.title,
-      productUrl: getCategoryBookUrl(ft.categorySlug),
-      fromPriceDisplay: ft.fromPriceLabel ?? `From $${ft.fromPrice}`,
-      reviewCount: 0,
-      rating: 0,
-      imageUrl: null,
-      freeCancellation: false,
-    });
-    topPicks = featuredTours
-      .filter((ft) => ft.categorySlug && !HIDDEN_ON_BEST_TOURS.includes(ft.categorySlug))
-      .slice(0, 6)
-      .map((ft) => ({
-        categorySlug: ft.categorySlug!,
-        categoryTitle: getPillarBySlug(ft.categorySlug!)?.title ?? ft.categorySlug!,
-        product: fallbackProduct(ft),
-        href: `/${ft.categorySlug}`,
-        isInternal: true,
-      }));
+    const staticSummaries = oneCodePerCategory.slice(0, 6).flatMap(({ categorySlug, productCode }) =>
+      getStaticProductSummaries([productCode], categorySlug)
+    );
+    if (staticSummaries.length > 0) {
+      topPicks = oneCodePerCategory.slice(0, 6).map(({ categorySlug, productCode }, i) => {
+        const s = staticSummaries[i];
+        if (!s) return null;
+        const pillar = getPillarBySlug(categorySlug);
+        const listing = getListingByProductCode(categorySlug, productCode);
+        const href = listing ? `/${categorySlug}/${listing.slug}` : s.productUrl;
+        return {
+          categorySlug,
+          categoryTitle: pillar?.title ?? categorySlug,
+          product: s,
+          href,
+          isInternal: !!listing,
+        };
+      }).filter((x): x is NonNullable<typeof x> => x !== null);
+    }
+    if (topPicks.length === 0) {
+      const fallbackProduct = (ft: (typeof featuredTours)[number]): ViatorProductSummary => ({
+        productCode: ft.id,
+        title: ft.title,
+        productUrl: getCategoryBookUrl(ft.categorySlug),
+        fromPriceDisplay: ft.fromPriceLabel ?? `From $${ft.fromPrice}`,
+        reviewCount: 0,
+        rating: 0,
+        imageUrl: null,
+        freeCancellation: false,
+      });
+      topPicks = featuredTours
+        .filter((ft) => ft.categorySlug && !HIDDEN_ON_BEST_TOURS.includes(ft.categorySlug))
+        .slice(0, 6)
+        .map((ft) => ({
+          categorySlug: ft.categorySlug!,
+          categoryTitle: getPillarBySlug(ft.categorySlug!)?.title ?? ft.categorySlug!,
+          product: fallbackProduct(ft),
+          href: `/${ft.categorySlug}`,
+          isInternal: true,
+        }));
+    }
   }
 
   return (

@@ -32,6 +32,19 @@ NEXT_PUBLIC_VIATOR_ARUBA_URL=https://www.viator.com/...  # Your link from Viator
 
 If unset, links use the default Viator Aruba destination page.
 
+### Viator API (tour cards, prices, images)
+
+Tour cards use the Viator Partner API when `VIATOR_API_KEY` is set (e.g. in Vercel env vars).
+
+- **Production (live data):** default. No extra env needed if your key is a production key.
+- **Sandbox (test key):** set the base URL so the app calls the sandbox API:
+  ```bash
+  VIATOR_API_BASE_URL=https://api.sandbox.viator.com/partner
+  ```
+  In Vercel: Project → Settings → Environment Variables → add `VIATOR_API_BASE_URL` with that value.
+
+If the key is missing or the API returns no usable data, the site shows hardcoded placeholder tour cards so the pages never look empty.
+
 ## Build
 
 ```bash

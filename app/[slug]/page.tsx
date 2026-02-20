@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getPillarBySlug, isPillarSlug } from "@/data/pillars";
 import { getProductCodesForPillar } from "@/data/pillarProducts";
+import { getStaticProductSummaries } from "@/data/staticProductSummaries";
 import { fetchProductsBulk } from "@/lib/viator-api";
 import { PillarTemplate } from "@/components/PillarTemplate";
 import { Footer } from "@/components/Footer";
@@ -58,13 +59,28 @@ export default async function PillarPage({ params }: Props) {
         (a, b) => (orderMap.get(a.productCode) ?? 999) - (orderMap.get(b.productCode) ?? 999)
       );
     } catch {
-      // Keep placeholder cards on API failure
+      // API failed; use static snapshot below
     }
   }
 
+  // When API returns no usable data (e.g. production without key), use static snapshot
+  // so production shows the same tour cards as localhost
+  const hasUsableProducts =
+    featuredProducts.length > 0 && featuredProducts.some((p) => p.title && p.title.trim().length > 0);
+  if (!hasUsableProducts && productCodes.length > 0) {
+    featuredProducts = getStaticProductSummaries(productCodes, slug);
+  }
+  const passToTemplate =
+    featuredProducts.length > 0 && featuredProducts.some((p) => p.title && p.title.trim().length > 0)
+      ? featuredProducts
+      : undefined;
+
   return (
     <>
-      <PillarTemplate pillar={pillar} featuredProducts={featuredProducts.length > 0 ? featuredProducts : undefined} />
+      <PillarTemplate
+        pillar={pillar}
+        featuredProducts={passToTemplate}
+      />
       <Footer />
     </>
   );

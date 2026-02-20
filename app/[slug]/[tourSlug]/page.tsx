@@ -6,7 +6,9 @@ import {
 } from "@/data/listings";
 import { getGuide, getGuideSlugsByCategory, getRelatedGuides } from "@/data/guides";
 import { getPillarBySlug } from "@/data/pillars";
+import { getStaticProductSummaries, getViatorProductUrl } from "@/data/staticProductSummaries";
 import { fetchProductsBulk, fetchProductDetails } from "@/lib/viator-api";
+import { getCategoryBookUrl } from "@/lib/booking";
 import { TourListingTemplate } from "@/components/TourListingTemplate";
 import { GuideTemplate } from "@/components/GuideTemplate";
 import { Footer } from "@/components/Footer";
@@ -99,6 +101,17 @@ export default async function CategorySubPage({ params }: Props) {
       } catch {
         // Use placeholder when API fails
       }
+      // When API is off or failed: fill from static summaries so guide picks show image, title, price
+      const anyMissing = picksWithTours.some((p) => !p.tour);
+      if (anyMissing) {
+        const staticSummaries = getStaticProductSummaries(productCodesToFetch, categorySlug);
+        const codeToProduct = new Map(staticSummaries.map((s) => [s.productCode, s]));
+        for (let i = 0; i < guide.picks.length; i++) {
+          if (picksWithTours[i].tour) continue;
+          const listing = getTourListing(categorySlug, guide.picks[i].slug);
+          if (listing) picksWithTours[i].tour = codeToProduct.get(listing.productCode) ?? null;
+        }
+      }
     }
 
     const relatedGuides = getRelatedGuides(categorySlug, guide.slug, 3).map((g) => ({
@@ -146,6 +159,18 @@ export default async function CategorySubPage({ params }: Props) {
     viatorItinerary = details;
   } catch {
     // Use placeholders when API fails; later a crawl job can refresh price/rating
+  }
+
+  // When API is disabled or fails: use static summaries; "View options & book" must go to Viator, not our listing URL
+  if (!liveData) {
+    const staticMain = getStaticProductSummaries([listing.productCode], categorySlug)[0];
+    if (staticMain) {
+      const viatorBookUrl = getViatorProductUrl(listing.productCode) ?? getCategoryBookUrl(categorySlug);
+      liveData = { ...staticMain, productUrl: viatorBookUrl };
+    }
+  }
+  if (relatedProducts.length === 0 && relatedProductCodes.length > 0) {
+    relatedProducts = getStaticProductSummaries(relatedProductCodes, categorySlug);
   }
 
   const codeToImage = new Map(relatedProducts.map((p) => [p.productCode, p.imageUrl ?? null]));

@@ -1,8 +1,19 @@
 /**
  * Viator Partner API – fetch product details for featured tour cards.
  * Uses POST /products/bulk (requires Full-access Affiliate or higher).
- * API key: exp-api-key header. Set VIATOR_API_KEY in env (server-side).
+ *
+ * Env (server-side):
+ * - VIATOR_API_KEY: your partner API key (required for live data).
+ * - VIATOR_USE_LIVE_API: set to "true" to enable live API calls. When unset or not "true", no
+ *   requests are made (site uses static/generated data). Re-enable later by setting this in Vercel.
+ * - VIATOR_API_BASE_URL: optional. Default is production.
+ *   - Production: https://api.viator.com/partner (default)
+ *   - Sandbox:    https://api.sandbox.viator.com/partner
+ *   If your key is from the sandbox, set VIATOR_API_BASE_URL to the sandbox URL in Vercel.
  */
+
+/** When false, fetchProductsBulk and fetchProductDetails return empty/null without calling Viator. Set VIATOR_USE_LIVE_API=true to enable. */
+const USE_LIVE_VIATOR_API = process.env.VIATOR_USE_LIVE_API === "true";
 
 const VIATOR_BASE =
   process.env.VIATOR_API_BASE_URL ?? "https://api.viator.com/partner";
@@ -300,8 +311,9 @@ interface ViatorItineraryItem {
 export async function fetchProductDetails(
   productCode: string
 ): Promise<ViatorProductDetails | null> {
+  if (!USE_LIVE_VIATOR_API || !productCode) return null;
   const apiKey = process.env.VIATOR_API_KEY;
-  if (!apiKey || !productCode) return null;
+  if (!apiKey) return null;
 
   const url = `${VIATOR_BASE}/products/${productCode}`;
   const res = await fetch(url, {
@@ -351,8 +363,9 @@ export async function fetchProductDetails(
 export async function fetchProductsBulk(
   productCodes: string[]
 ): Promise<ViatorProductSummary[]> {
+  if (!USE_LIVE_VIATOR_API || productCodes.length === 0) return [];
   const apiKey = process.env.VIATOR_API_KEY;
-  if (!apiKey || productCodes.length === 0) return [];
+  if (!apiKey) return [];
 
   const url = `${VIATOR_BASE}/products/bulk`;
   const res = await fetch(url, {
