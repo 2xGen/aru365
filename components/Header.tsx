@@ -6,7 +6,6 @@ import { useState, useRef, useEffect } from "react";
 import { pillars } from "@/data/pillars";
 
 const HIDDEN_IN_NAV = [
-  "airport-transfers-in-aruba",
   "sea-glass-island-aruba",
   "water-sports-and-rentals-in-aruba",
   "things-to-do-in-aruba-with-kids",

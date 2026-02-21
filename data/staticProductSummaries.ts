@@ -8,9 +8,9 @@
  */
 import type { ViatorProductSummary } from "@/lib/viator-api";
 import { getListingByProductCode } from "@/data/listings";
-import { getCategoryBookUrl } from "@/lib/booking";
+import { getCategoryBookUrl, getViatorProductBookUrl } from "@/lib/booking";
 
-/** Viator API snapshot: run `node scripts/dump-static-product-summaries.mjs` locally (with VIATOR_API_KEY in .env.local) to fill this file. Production then shows real titles, prices, ratings, and images without calling the API. */
+/** Viator API snapshot: run `node scripts/dump-static-product-summaries.mjs` locally (with VIATOR_API_KEY in .env.local) to fill this file. Images and prices are taken from Viator only via this dump—no placeholders. Production then shows Viator titles, prices, ratings, and images without calling the API at runtime. */
 import generatedStatic from "./staticProductSummariesGenerated.json";
 
 const generatedByCode = generatedStatic as Record<
@@ -19,12 +19,11 @@ const generatedByCode = generatedStatic as Record<
 >;
 
 /**
- * Returns the Viator booking URL for a product from the dump (for "View options & book" on single tour pages).
- * Use this when you need the external Viator link; getStaticProductSummaries returns internal links for listings.
+ * Returns the Viator booking URL for a product in www.viator.com format (not shop.live.rc.viator.com).
+ * Use for "View options & book" on single tour pages and anywhere we need a product booking link.
  */
-export function getViatorProductUrl(productCode: string): string | null {
-  const g = generatedByCode[productCode];
-  return g?.productUrl && typeof g.productUrl === "string" ? g.productUrl : null;
+export function getViatorProductUrl(productCode: string): string {
+  return getViatorProductBookUrl(productCode);
 }
 
 /** Static card data per product code (fallback when no generated snapshot). */
@@ -221,6 +220,15 @@ const staticByCode: Record<
   "171319P2": { title: "VIP Airport Hosting Departure", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
   "6687P7": { title: "VIP Luxury SUV Airport Transfer", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
   "5492822P1": { title: "Private Round Trip Airport Transfer", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
+  // Airport transfers (Aruba) — fallback until you run dump; run `node scripts/dump-static-product-summaries.mjs` for Viator images & live prices
+  "12431P5": { title: "Private Airport Transportation Services", fromPriceDisplay: "Price from $45", rating: 0, reviewCount: 0, imageUrl: null },
+  "2455AUAAPTRND": { title: "Roundtrip Aruba Airport Transfer", fromPriceDisplay: "Price from $75", rating: 0, reviewCount: 0, imageUrl: null },
+  "332620P2": { title: "Private Transfers", fromPriceDisplay: "Price from $40", rating: 0, reviewCount: 0, imageUrl: null },
+  "242476P1": { title: "AyCaramba Transfer and Private Tour Aruba", fromPriceDisplay: "Price from $120", rating: 0, reviewCount: 0, imageUrl: null },
+  "3046AUAAPTRND": { title: "Roundtrip Aruba Airport Private Transfer", fromPriceDisplay: "Price from $80", rating: 0, reviewCount: 0, imageUrl: null },
+  "5597840P1": { title: "Aruba Private Airport Transfer", fromPriceDisplay: "Price from $42", rating: 0, reviewCount: 0, imageUrl: null },
+  "7389P5": { title: "One-Way Private Airport Transfer", fromPriceDisplay: "Price from $38", rating: 0, reviewCount: 0, imageUrl: null },
+  "5568850P2": { title: "Private Airport Transfers", fromPriceDisplay: "Price from $40", rating: 0, reviewCount: 0, imageUrl: null },
 };
 
 /**
@@ -243,7 +251,7 @@ export function getStaticProductSummaries(
     const title = listing?.seoTitle ?? data.title;
     const productUrl = listing
       ? `/${categorySlug}/${listing.slug}`
-      : (generated?.productUrl && typeof generated.productUrl === "string" ? generated.productUrl : categoryBookUrl);
+      : getViatorProductBookUrl(code);
     out.push({
       productCode: code,
       title,

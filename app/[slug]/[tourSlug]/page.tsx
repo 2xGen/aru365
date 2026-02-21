@@ -161,17 +161,23 @@ export default async function CategorySubPage({ params }: Props) {
     // Use placeholders when API fails; later a crawl job can refresh price/rating
   }
 
-  // When API is disabled or fails: use static summaries; "View options & book" must go to Viator, not our listing URL
+  // When API is disabled or fails: use static summaries
   if (!liveData) {
     const staticMain = getStaticProductSummaries([listing.productCode], categorySlug)[0];
-    if (staticMain) {
-      const viatorBookUrl = getViatorProductUrl(listing.productCode) ?? getCategoryBookUrl(categorySlug);
-      liveData = { ...staticMain, productUrl: viatorBookUrl };
-    }
+    if (staticMain) liveData = staticMain;
+  }
+  // Always use www.viator.com product URL (not shop.live.rc.viator.com) so booking links work
+  if (liveData) {
+    liveData = { ...liveData, productUrl: getViatorProductUrl(listing.productCode) };
   }
   if (relatedProducts.length === 0 && relatedProductCodes.length > 0) {
     relatedProducts = getStaticProductSummaries(relatedProductCodes, categorySlug);
   }
+  // Related cards that link to Viator (no internal listing) should use www.viator.com format
+  relatedProducts = relatedProducts.map((p) => ({
+    ...p,
+    productUrl: getViatorProductUrl(p.productCode),
+  }));
 
   const codeToImage = new Map(relatedProducts.map((p) => [p.productCode, p.imageUrl ?? null]));
   const relatedListings = relatedListingsRaw.map((l) => ({

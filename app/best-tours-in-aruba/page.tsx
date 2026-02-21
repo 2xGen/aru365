@@ -41,7 +41,6 @@ const bestToursSchema = {
 
 /** One tour per category for the top picks section (first product code per pillar). */
 const HIDDEN_ON_BEST_TOURS = [
-  "airport-transfers-in-aruba",
   "sea-glass-island-aruba",
   "water-sports-and-rentals-in-aruba",
   "things-to-do-in-aruba-with-kids",

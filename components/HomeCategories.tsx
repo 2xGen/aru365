@@ -5,7 +5,6 @@ import { pillars } from "@/data/pillars";
 import { CategoryIcon } from "./icons/CategoryIcons";
 
 const HIDDEN_ON_HOMEPAGE = [
-  "airport-transfers-in-aruba",
   "sea-glass-island-aruba",
   "water-sports-and-rentals-in-aruba",
   "things-to-do-in-aruba-with-kids",

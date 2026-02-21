@@ -96,28 +96,31 @@ for (let i = 0; i < allCodes.length; i += BATCH) {
   for (const item of data) {
     if (item.status !== "ACTIVE" || !item.productCode || !item.productUrl) continue;
     const pricing = item.pricingInfo ?? {};
-    let priceFrom =
-      typeof pricing.priceFrom === "number"
-        ? pricing.priceFrom
-        : typeof pricing.fromPrice === "number"
-          ? pricing.fromPrice
-          : pricing.recommendedRetailPrice ?? pricing.minPrice;
-    if (priceFrom === undefined && Array.isArray(pricing.ageBands) && pricing.ageBands.length > 0) {
-      const prices = pricing.ageBands
-        .map((b) => b.recommendedRetailPrice ?? b.price)
-        .filter((n) => typeof n === "number");
-      if (prices.length > 0) priceFrom = Math.min(...prices);
-    }
-    const currency = pricing.currency ?? "USD";
-    const sym = currency === "USD" ? "$" : `${currency} `;
+    // Use Viator's product-level "from price": prefer summary (e.g. "From $31.00"), then priceFrom/fromPrice (not schedule min)
     let fromPriceDisplay;
-    if (typeof priceFrom === "number") {
-      fromPriceDisplay = `Price from ${sym}${Math.round(priceFrom)}`;
-    } else if (typeof pricing.summary === "string" && pricing.summary.trim()) {
+    if (typeof pricing.summary === "string" && pricing.summary.trim()) {
       fromPriceDisplay = pricing.summary.trim();
       if (!/^(from\s+)?\$?\d+/i.test(fromPriceDisplay)) fromPriceDisplay = `Price from ${fromPriceDisplay}`;
     } else {
-      fromPriceDisplay = "Price from (see options)";
+      let priceFrom =
+        typeof pricing.priceFrom === "number"
+          ? pricing.priceFrom
+          : typeof pricing.fromPrice === "number"
+            ? pricing.fromPrice
+            : pricing.recommendedRetailPrice ?? pricing.minPrice;
+      if (priceFrom === undefined && Array.isArray(pricing.ageBands) && pricing.ageBands.length > 0) {
+        const prices = pricing.ageBands
+          .map((b) => b.recommendedRetailPrice ?? b.price)
+          .filter((n) => typeof n === "number");
+        if (prices.length > 0) priceFrom = Math.min(...prices);
+      }
+      const currency = pricing.currency ?? "USD";
+      const sym = currency === "USD" ? "$" : `${currency} `;
+      if (typeof priceFrom === "number") {
+        fromPriceDisplay = `Price from ${sym}${Math.round(priceFrom)}`;
+      } else {
+        fromPriceDisplay = "Price from (see options)";
+      }
     }
     const totalReviews = Number(item.reviews?.totalReviews) || 0;
     const averageRating =
@@ -138,7 +141,7 @@ for (let i = 0; i < allCodes.length; i += BATCH) {
   console.log("Fetched batch", Math.floor(i / BATCH) + 1, "/", Math.ceil(allCodes.length / BATCH));
 }
 
-// Override prices from schedules (recommendedRetailPrice)
+// Override with schedule summary.fromPrice when present (Viator's official "from price", not min of all bands)
 const schedUrl = `${base}/availability/schedules/bulk`;
 const schedRes = await fetch(schedUrl, {
   method: "POST",
@@ -156,24 +159,18 @@ if (schedRes.ok) {
   for (const schedule of list) {
     const code = schedule.productCode;
     if (!code || !out[code]) continue;
-    let minPrice = null;
-    for (const item of schedule.bookableItems ?? []) {
-      for (const season of item.seasons ?? []) {
-        for (const record of season.pricingRecords ?? []) {
-          for (const detail of record.pricingDetails ?? []) {
-            const rrp = detail.price?.original?.recommendedRetailPrice;
-            if (typeof rrp === "number" && rrp > 0) {
-              if (minPrice === null || rrp < minPrice) minPrice = rrp;
-            }
-          }
-        }
-      }
-    }
-    if (minPrice !== null) {
-      out[code].fromPriceDisplay = `Price from $${Math.round(minPrice)}`;
+    const current = out[code].fromPriceDisplay || "";
+    const hasProductPrice =
+      current && !current.includes("(see options)") && /\d/.test(current);
+    if (hasProductPrice) continue;
+    const fromPrice = schedule.summary?.fromPrice;
+    if (typeof fromPrice === "number" && fromPrice > 0) {
+      const currency = schedule.currency ?? "USD";
+      const sym = currency === "USD" ? "$" : `${currency} `;
+      out[code].fromPriceDisplay = `Price from ${sym}${Math.round(fromPrice)}`;
     }
   }
-  console.log("Applied schedule prices for", list.length, "products");
+  console.log("Applied schedule summary.fromPrice for", list.length, "products");
 }
 
 const outPath = path.join(root, "data", "staticProductSummariesGenerated.json");

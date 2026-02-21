@@ -108,6 +108,18 @@ export const pillarProductCodes: Record<string, string[]> = {
     "6593P11",         // More: Exclusive Dinner Cruise
     "5493518P1",       // More: Eagle Beach Romantic Sunset Picnic Cabana
   ],
+  "airport-transfers-in-aruba": [
+    "12431P5",         // Private Airport Transportation Services
+    "2455AUAAPTRND",   // Roundtrip Aruba Airport Transfer
+    "332620P2",        // Private Transfers
+    "242476P1",        // AyCaramba Transfer and Private Tour
+    "3046AUAAPTRND",   // Roundtrip Aruba Airport Private Transfer (Palm-Eagle Beach)
+    "5492822P1",       // Private Round Trip Airport Transfer
+    "5597840P1",       // Aruba Private Airport Transfer
+    "6687P7",          // VIP Luxury SUV Airport Transfer
+    "7389P5",          // One-Way Private Airport Transfer
+    "5568850P2",       // Private airport transfers (Oranjestad)
+  ],
 };
 
 /** Returns all product codes for the pillar; same list is used for one bulk API call. First 4 = top picks, rest = more options. */

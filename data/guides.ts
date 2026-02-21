@@ -753,14 +753,14 @@ const guides: GuidePage[] = [
   {
     categorySlug: "sunset-and-dinner-cruises-in-aruba",
     slug: "budget-sunset-cruises",
-    title: "Budget friendly sunset cruises in Aruba (under $50)",
+    title: "Budget friendly sunset cruises in Aruba (under $60)",
     description:
-      "Compare the best budget sunset cruises in Aruba under $50—open bar, snacks, and golden-hour sailing without breaking the bank. Arusun, Dolphin, and Happy Hour sails.",
+      "Compare the best budget sunset cruises in Aruba under $60—open bar, snacks, and golden-hour sailing without breaking the bank. Arusun and Dolphin sails.",
     picks: [
       {
         slug: "arusun-sunset-sail",
         whyWePickIt:
-          "The Arusun is often the lowest-priced sunset sail in Aruba: 65-foot catamaran, unlimited open bar, snacks, and a 2–2.5 hour cruise. Same well-reviewed boat as the daytime snorkel sail. Ideal if you want a solid sunset experience for around $35–50 per person.",
+          "The Arusun is often the lowest-priced sunset sail in Aruba: 65-foot catamaran, unlimited open bar, snacks, and a 2–2.5 hour cruise. Same well-reviewed boat as the daytime snorkel sail. Ideal if you want a solid sunset experience for around $35–60 per person.",
         bestFor: [
           "Travelers on a tight budget who still want open bar and sunset",
           "Anyone who wants a shorter sail (2–2.5 hours) at a great price",
@@ -771,32 +771,21 @@ const guides: GuidePage[] = [
       {
         slug: "dolphin-sunset-cruise",
         whyWePickIt:
-          "The Dolphin sunset cruise packs open bar, snacks, and a lively sail into a mid-range price—often under $50. Same popular catamaran as the daytime snorkel trip. Great for groups and couples who want a fun atmosphere and unlimited drinks without paying for dinner.",
+          "The Dolphin sunset cruise packs open bar, snacks, and a lively sail into a mid-range price—often under $60. Same popular catamaran as the daytime snorkel trip. Great for groups and couples who want a fun atmosphere and unlimited drinks without paying for dinner.",
         bestFor: [
-          "Groups and couples wanting a fun sunset sail under $50",
+          "Groups and couples wanting a fun sunset sail under $60",
           "Anyone who enjoyed the daytime Dolphin and wants a sunset version",
           "Guests who want open bar and snacks, not a full dinner",
           "Travelers looking for a social, well-reviewed budget option",
         ],
       },
-      {
-        slug: "happy-hour-sunset-sail",
-        whyWePickIt:
-          "Octopus's Happy Hour sunset sail often lands around or under $50 with premium touches: cushioned seating, drinks served to your seat, and a small group. You get table service and cocktails without dinner-cruise prices. Best value if you want comfort and service on a budget.",
-        bestFor: [
-          "Guests who want table service and comfort at a budget price",
-          "Couples wanting a refined sail without paying for dinner",
-          "Anyone who prefers drinks brought to their seat (no bar queue)",
-          "Travelers comparing budget sunset options with good service",
-        ],
-      },
     ],
     intro:
-      "Budget sunset cruises in Aruba under $50 are easy to find—the Arusun, Dolphin, and Octopus Happy Hour sail all offer open bar, snacks or appetizers, and golden-hour views at mid-range or lower prices. None include dinner; you get sailing and drinks. Compare duration, vibe, and service to find your fit.",
+      "Budget sunset cruises in Aruba under $60 are easy to find—the Arusun and Dolphin both offer open bar, snacks or appetizers, and golden-hour views at mid-range or lower prices. None include dinner; you get sailing and drinks. Compare duration and vibe to find your fit.",
     whyBlock: {
       title: "Why choose a budget sunset cruise in Aruba?",
       content:
-        "Budget sunset cruises give you the same golden-hour views and open bar as pricier options—you just skip the full dinner. The Arusun is often the cheapest; the Dolphin adds a lively vibe; Octopus Happy Hour adds table service. All typically run under $50 per person. Ideal for travelers who want sunset sailing without a big evening spend.",
+        "Budget sunset cruises give you the same golden-hour views and open bar as pricier options—you just skip the full dinner. The Arusun is often the cheapest; the Dolphin adds a lively vibe. Both typically run under $60 per person. Ideal for travelers who want sunset sailing without a big evening spend.",
     },
     whatToExpect: [
       "Check-in at the marina or beach departure point. Arrive 15–20 minutes early.",
@@ -808,17 +797,17 @@ const guides: GuidePage[] = [
       {
         question: "What is the cheapest sunset cruise in Aruba?",
         answer:
-          "The Arusun sunset sail is often the lowest-priced—around $35–50 per person for a 2–2.5 hour cruise with open bar and snacks. The Dolphin and Octopus Happy Hour sail also often run under $50. None include dinner; all include drinks. Check current prices on the booking pages.",
+          "The Arusun sunset sail is often the lowest-priced—around $35–60 per person for a 2–2.5 hour cruise with open bar and snacks. The Dolphin also often runs under $60. None include dinner; all include drinks. Check current prices on the booking pages.",
       },
       {
-        question: "Are there sunset cruises in Aruba under $50?",
+        question: "Are there sunset cruises in Aruba under $60?",
         answer:
-          "Yes. The Arusun, Dolphin sunset cruise, and Octopus Happy Hour sunset sail typically offer sunset cruises under $50 per person. All include open bar and snacks or light bites. Dinner cruises usually cost more; these focus on sailing and drinks for a lower price.",
+          "Yes. The Arusun and Dolphin sunset cruise typically offer sunset cruises under $60 per person. Both include open bar and snacks or light bites. Dinner cruises usually cost more; these focus on sailing and drinks for a lower price.",
       },
       {
         question: "What is included on budget sunset cruises in Aruba?",
         answer:
-          "Budget sunset cruises typically include the sail, unlimited drinks (open bar), and snacks or light appetizers. The Arusun and Dolphin offer open bar and snacks; Octopus Happy Hour adds cushioned seating and drinks to your seat. No full dinner—you save by eating before or after.",
+          "Budget sunset cruises typically include the sail, unlimited drinks (open bar), and snacks or light appetizers. The Arusun and Dolphin both offer open bar and snacks. No full dinner—you save by eating before or after.",
       },
       {
         question: "Is the Arusun or Dolphin better for a cheap sunset cruise?",
@@ -828,7 +817,7 @@ const guides: GuidePage[] = [
       {
         question: "Do budget sunset cruises in Aruba have open bar?",
         answer:
-          "Yes. The Arusun, Dolphin, and Octopus Happy Hour sunset sails all include unlimited drinks (open bar). You don't sacrifice drinks for price—you sacrifice a full dinner. Cocktails, beer, wine, and soft drinks are typically included.",
+          "Yes. The Arusun and Dolphin sunset sails both include unlimited drinks (open bar). You don't sacrifice drinks for price—you sacrifice a full dinner. Cocktails, beer, wine, and soft drinks are typically included.",
       },
     ],
   },
@@ -3611,6 +3600,184 @@ const guides: GuidePage[] = [
         answer:
           "Yes. The paparazzi-style shoot is especially fun for groups and friends. The sunset shoot works for couples, families, or groups.",
       },
+    ],
+  },
+  // ————— Airport Transfers in Aruba —————
+  {
+    categorySlug: "airport-transfers-in-aruba",
+    slug: "private-airport-transfers",
+    title: "Best private airport transfers in Aruba",
+    description:
+      "Compare the best private airport transfers in Aruba—door-to-door service, meet-and-greet at Queen Beatrix Airport, no shared shuttles. Fixed pricing, ideal for families, couples, and travelers who want a stress-free start or end to their trip.",
+    picks: [
+      { slug: "private-airport-transportation-services", whyWePickIt: "A dedicated private vehicle and driver from Queen Beatrix Airport to your hotel. No sharing; meet-and-greet and fixed price. Ideal for families and anyone who wants a stress-free arrival.", bestFor: ["Families and groups", "Travelers who want a fixed price", "Anyone with lots of luggage"] },
+      { slug: "private-transfers-aruba", whyWePickIt: "Flexible private transfers for airport, hotel, or cruise port. One-way or round-trip; some operators allow a short stop or custom route. Good for travelers who want a private car without a set tour.", bestFor: ["Private car preference", "Airport, hotel, or port transfers", "Small groups of 2–4"] },
+      { slug: "private-airport-transfers-oranjestad", whyWePickIt: "Private transfers covering Oranjestad and across Aruba. Same door-to-door and meet-and-greet quality whether you're in the capital or the hotel strip.", bestFor: ["Guests in Oranjestad", "Any address on the island", "One-way or round-trip"] },
+    ],
+    intro: "Private airport transfers in Aruba mean a vehicle and driver just for you—no shared shuttles, no taxi queue. Your driver meets you at the airport (or picks you up at your hotel for departure) and takes you straight to your destination. Fixed price, confirmed in advance.",
+    whyBlock: {
+      title: "Why choose a private airport transfer in Aruba?",
+      content:
+        "Private transfers give you a dedicated vehicle and driver from Queen Beatrix International Airport to your hotel or address—no sharing with other travelers, no haggling at the taxi rank. You get a confirmed price before you fly, meet-and-greet at arrivals, and a direct ride. Ideal for families with luggage, late-night arrivals, or anyone who wants a smooth, predictable start or end to their Aruba trip.",
+    },
+    whatToExpect: [
+      "Book online with your flight and hotel details. You'll receive confirmation and meeting instructions.",
+      "On arrival: after customs, look for your driver with a sign. They'll help with bags and take you to your hotel or address.",
+      "On departure: your driver picks you up at an agreed time (usually 2–3 hours before your flight) and drives you to the airport.",
+    ],
+    faqs: [
+      { question: "What is the difference between private and shared airport transfer in Aruba?", answer: "Private means the vehicle is only for you (and your party). Shared means you may ride with other travelers and make multiple stops. Private is faster and more comfortable; shared can be cheaper per person." },
+      { question: "How do I find my private transfer driver at Aruba airport?", answer: "Your confirmation will include meeting instructions. Drivers typically wait in the arrivals hall or just outside with a sign with your name. Provide your flight number so they can track delays." },
+      { question: "Are private airport transfers in Aruba safe?", answer: "Yes. Reputable operators use licensed drivers and insured vehicles. Pre-booking with a known provider gives you a confirmed driver and fixed price—no surprises at the curb." },
+      { question: "Can I book a private transfer for only arrival or only departure?", answer: "Yes. Most operators offer one-way (arrival or departure) or round-trip. Book the leg or legs you need." },
+      { question: "How much does a private airport transfer in Aruba cost?", answer: "Prices vary by vehicle type and distance. Private cars are typically priced per vehicle (not per person). Round-trip often costs less per leg than two one-ways. Check each product for current rates." },
+    ],
+  },
+  {
+    categorySlug: "airport-transfers-in-aruba",
+    slug: "round-trip-airport-transfers",
+    title: "Round trip airport transfers in Aruba",
+    description:
+      "Book round-trip airport transfers in Aruba in one go—arrival and departure covered, often at a better rate than two one-ways. Private and shared options to Palm Beach, Eagle Beach, Oranjestad, and the hotel strip.",
+    picks: [
+      { slug: "roundtrip-aruba-airport-transfer", whyWePickIt: "Arrival and departure in one booking. Covers airport–hotel and hotel–airport with meet-and-greet and confirmed pickup time for your return. Often better value than two one-ways.", bestFor: ["One booking for both legs", "Oranjestad and hotel strip", "Fixed price for the whole trip"] },
+      { slug: "roundtrip-airport-private-transfer-palm-eagle", whyWePickIt: "Round-trip private transfer tailored for Palm Beach and Eagle Beach. Same convenience—private vehicle, meet-and-greet, and return pickup—focused on the main resort area.", bestFor: ["Palm Beach and Eagle Beach guests", "Private round-trip", "Families and groups"] },
+      { slug: "private-round-trip-airport-transfer", whyWePickIt: "A straightforward private round-trip: dedicated vehicle and driver for both arrival and departure. No sharing; one price for both legs.", bestFor: ["Private car both ways", "Simple, all-in-one booking", "Any hotel area"] },
+    ],
+    intro: "Round-trip airport transfers in Aruba let you lock in both your arrival and departure in one booking. You'll get airport-to-hotel on the day you land and hotel-to-airport on the day you fly home. Often cheaper per leg than booking two one-ways, and you only arrange it once.",
+    whyBlock: {
+      title: "Why book a round-trip airport transfer in Aruba?",
+      content:
+        "Round-trip transfers cover both legs in one booking—airport to hotel when you arrive and hotel to airport when you leave. You get a single confirmed price, one less thing to organize during your stay, and many operators offer a round-trip rate that beats two separate one-way bookings. Ideal for travelers who know their dates and want arrival and departure sorted before they fly.",
+    },
+    whatToExpect: [
+      "Book with your arrival and departure dates and flight details. Confirm your hotel or address.",
+      "Arrival: your driver meets you at the airport and takes you to your hotel.",
+      "Departure: the operator confirms your pickup time (usually 2–3 hours before flight). Your driver picks you up at your hotel and takes you to the airport.",
+    ],
+    faqs: [
+      { question: "Is round-trip airport transfer in Aruba cheaper than two one-ways?", answer: "Often yes. Many operators offer a round-trip rate that is less than the combined cost of two one-way bookings. Always compare when you book." },
+      { question: "What if my departure flight time changes?", answer: "Contact the operator as soon as you know. They can usually adjust your pickup time. Provide your updated flight number so they can track it." },
+      { question: "Do I need to confirm my return transfer?", answer: "You'll typically receive confirmation for both legs when you book. Some operators send a reminder or ask you to confirm the return pickup time a day before. Check your confirmation email for their process." },
+      { question: "Can I book round-trip if I'm staying at different hotels for arrival and departure?", answer: "Usually round-trip assumes the same address for both legs. If your stay is split, book two one-ways or contact the operator to see if they can accommodate two different pickup/drop-off points." },
+      { question: "How far in advance should I book a round-trip airport transfer in Aruba?", answer: "Booking at least 24–48 hours ahead is recommended. For peak season or large groups, a few days in advance is safer. Last-minute bookings may be possible but depend on availability." },
+    ],
+  },
+  {
+    categorySlug: "airport-transfers-in-aruba",
+    slug: "one-way-airport-transfers",
+    title: "One-way airport transfers in Aruba",
+    description:
+      "One-way private airport transfers in Aruba—book only the leg you need. Airport to hotel on arrival or hotel to airport on departure. Private car, meet-and-greet, fixed price. Perfect if you have a rental car or flexible plans.",
+    picks: [
+      { slug: "one-way-private-airport-transfer", whyWePickIt: "Book a single leg—either airport to hotel or hotel to airport. Private car, no sharing. Ideal if you have a rental car for the rest of the trip or only need one leg.", bestFor: ["Only arrival or only departure", "Rental car the rest of the stay", "Flexible plans"] },
+      { slug: "aruba-private-airport-transfer", whyWePickIt: "Straightforward private airport transfer in Aruba. One-way service with meet-and-greet at the airport or pickup at your hotel. Fixed price, door-to-door.", bestFor: ["Simple one-way booking", "Couples and small groups", "Fixed price before you fly"] },
+    ],
+    intro: "One-way airport transfers in Aruba are for when you only need a single leg—either from the airport to your hotel on arrival or from your hotel to the airport on departure. Private car, meet-and-greet (for airport pickups), and fixed price. Useful if you're renting a car for the rest of your stay or your plans don't require round-trip.",
+    whyBlock: {
+      title: "Why book a one-way airport transfer in Aruba?",
+      content:
+        "One-way transfers are ideal when you only need a single leg—for example you have a rental car for the rest of your stay, you're organizing departure separately, or your return plans are still flexible. You pay for just the journey you need, with the same benefits: private car, meet-and-greet at the airport (for arrival), and a fixed price confirmed in advance. No commitment to a return leg.",
+    },
+    whatToExpect: [
+      "Choose arrival (airport to hotel) or departure (hotel to airport). Enter your flight and address details.",
+      "For arrival: your driver meets you at the airport and takes you to your hotel or address.",
+      "For departure: your driver picks you up at an agreed time and takes you to the airport.",
+    ],
+    faqs: [
+      { question: "When should I book a one-way airport transfer in Aruba?", answer: "Book when you only need one leg—e.g. you have a rental car for the rest of the trip, or you're only organizing an arrival transfer and will arrange departure separately. One-way is also useful if your departure plans are uncertain." },
+      { question: "Is one-way transfer cheaper than round-trip?", answer: "One-way is half the journey, so it costs less than a full round-trip. If you need both legs, round-trip often offers better value per leg than two one-ways." },
+      { question: "Can I book two one-ways instead of round-trip?", answer: "Yes. Some travelers book two one-ways (e.g. different operators or different vehicle types for arrival vs departure). Round-trip is usually simpler and often cheaper." },
+      { question: "How do I book a departure-only airport transfer in Aruba?", answer: "Select the one-way option and choose hotel-to-airport. Enter your hotel and flight details. The operator will confirm the pickup time (typically 2–3 hours before your flight)." },
+      { question: "Do one-way transfers include flight tracking?", answer: "For arrival transfers, many operators track your flight so they can adjust if you're delayed. Provide your flight number when you book. For departure, they use the time you provide and may send a reminder." },
+    ],
+  },
+  {
+    categorySlug: "airport-transfers-in-aruba",
+    slug: "vip-luxury-airport-transfers",
+    title: "VIP & luxury airport transfers in Aruba",
+    description:
+      "VIP and luxury SUV airport transfers in Aruba—premium vehicles, professional drivers, meet-and-greet at Queen Beatrix Airport. Ideal for special occasions, business travel, and travelers who want extra space and comfort.",
+    picks: [
+      { slug: "vip-luxury-suv-airport-transfer", whyWePickIt: "Travel in a luxury SUV with a professional driver. Meet-and-greet at the airport, help with bags, and a premium ride to your hotel. Ideal for groups with more luggage or anyone who wants an upgrade.", bestFor: ["Premium vehicle", "Extra space for luggage", "Special occasions"] },
+      { slug: "private-airport-transportation-services", whyWePickIt: "Private airport transportation with a dedicated vehicle and driver. Reliable, comfortable, and stress-free. A strong option for families and anyone who values a private, professional service.", bestFor: ["Families and groups", "Private, professional service", "Fixed pricing"] },
+    ],
+    intro: "VIP and luxury airport transfers in Aruba give you a premium vehicle—often a luxury SUV—and a professional driver for your arrival or departure. Meet-and-greet at the airport, assistance with bags, and a comfortable ride. Ideal for special occasions, business travel, or anyone who wants more space and comfort than a standard car.",
+    whyBlock: {
+      title: "Why choose a VIP or luxury airport transfer in Aruba?",
+      content:
+        "VIP and luxury transfers upgrade your arrival or departure with a premium vehicle—typically a luxury SUV—more space for passengers and luggage, and a professional driver with meet-and-greet service. You get the same door-to-door convenience as a standard private transfer, with added comfort and style. Worth it for special occasions, business trips, or anyone who prefers a higher standard of service from the moment they land.",
+    },
+    whatToExpect: [
+      "Book your VIP or luxury transfer with flight and hotel details. Confirm vehicle type (e.g. luxury SUV).",
+      "Your driver meets you at the airport (or picks you up at your hotel) with a sign. They assist with luggage and escort you to the vehicle.",
+      "Comfortable, direct ride to your destination. Vehicles are typically well-maintained and air-conditioned.",
+    ],
+    faqs: [
+      { question: "What is included in a VIP airport transfer in Aruba?", answer: "Typically a premium or luxury vehicle (e.g. SUV), a professional driver, meet-and-greet at the airport, and door-to-door service. Some operators add bottled water or other amenities. Check the product for exact inclusions." },
+      { question: "How many people fit in a luxury SUV airport transfer?", answer: "Luxury SUVs typically seat 4–6 passengers depending on luggage. For larger groups, ask about a van or multiple vehicles." },
+      { question: "Is VIP transfer worth it for a short ride?", answer: "The ride from the airport to the hotel strip is usually 15–25 minutes. VIP is about comfort and service rather than distance—worth it if you value a premium vehicle and a stress-free experience." },
+      { question: "Can I book VIP for both arrival and departure?", answer: "Yes. Many operators offer one-way or round-trip VIP service. You get the same premium vehicle and service for both legs when you book round-trip." },
+      { question: "Do VIP transfers cost more than standard private transfers?", answer: "Yes. VIP and luxury options are priced higher than standard private cars due to the vehicle and service level. Compare products to find the right balance of cost and comfort." },
+    ],
+  },
+  {
+    categorySlug: "airport-transfers-in-aruba",
+    slug: "airport-transfers-palm-eagle-beach",
+    title: "Airport transfers to Palm Beach & Eagle Beach, Aruba",
+    description:
+      "Airport transfers to Palm Beach and Eagle Beach, Aruba—private and round-trip options from Queen Beatrix Airport. Quick, comfortable rides to the main resort strip. Fixed price, meet-and-greet, no taxi queue.",
+    picks: [
+      { slug: "roundtrip-airport-private-transfer-palm-eagle", whyWePickIt: "Round-trip private transfer focused on Palm Beach and Eagle Beach. One booking for arrival and departure; private vehicle and meet-and-greet. Ideal for guests staying in the main resort strip.", bestFor: ["Palm Beach and Eagle Beach", "Round-trip in one booking", "Private vehicle"] },
+      { slug: "aruba-private-airport-transfer", whyWePickIt: "Private airport transfer to any address in Aruba, including Palm Beach and Eagle Beach. Door-to-door, meet-and-greet, fixed price. Simple and reliable.", bestFor: ["Any hotel in Aruba", "One-way or round-trip", "Couples and small groups"] },
+      { slug: "roundtrip-aruba-airport-transfer", whyWePickIt: "Roundtrip service covering the hotel strip and Oranjestad. Arrival and departure in one booking with confirmed pickup for your return.", bestFor: ["Hotel strip and Oranjestad", "Round-trip value", "Fixed price both ways"] },
+    ],
+    intro: "Airport transfers to Palm Beach and Eagle Beach take you from Queen Beatrix International Airport to the heart of Aruba's resort area. Most hotels are 15–25 minutes from the airport. Pre-book a private or round-trip transfer for a fixed price and a meet-and-greet—no taxi queue or haggling.",
+    whyBlock: {
+      title: "Why pre-book airport transfers to Palm Beach and Eagle Beach?",
+      content:
+        "Palm Beach and Eagle Beach are Aruba's main resort areas—most visitors stay here, and the drive from the airport is typically 15–25 minutes. Pre-booking a transfer gives you a fixed price, a driver waiting with a sign at arrivals, and a direct ride to your hotel. No haggling with taxis or waiting for a shared shuttle. Round-trip options often save money per leg and cover your departure as well.",
+    },
+    whatToExpect: [
+      "Book with your hotel name and flight details. You'll receive confirmation and meeting instructions.",
+      "On arrival: your driver meets you at the airport and drives you to your Palm Beach or Eagle Beach hotel.",
+      "On departure: pickup at your hotel at an agreed time (usually 2–3 hours before your flight) and direct drive to the airport.",
+    ],
+    faqs: [
+      { question: "How long is the drive from Aruba airport to Palm Beach?", answer: "Typically 15–25 minutes depending on your exact hotel and traffic. Eagle Beach is similarly close; Noord and the northern end of Palm Beach may be at the longer end of that range." },
+      { question: "Which hotels are in the Palm Beach and Eagle Beach transfer zone?", answer: "Most resorts and hotels in Palm Beach, Eagle Beach, Noord, and the surrounding area are covered. Enter your hotel name when you book to confirm. Some operators list specific zones or hotels." },
+      { question: "Is round-trip to Palm Beach cheaper than two one-ways?", answer: "Often yes. Round-trip transfers to the hotel strip frequently offer a better per-leg rate than booking two separate one-ways. Compare when you book." },
+      { question: "Do transfers to Palm Beach include flight tracking?", answer: "Many operators track your flight for arrival transfers so they can adjust if you're delayed. Provide your flight number when you book. For departure, they confirm your pickup time in advance." },
+      { question: "Can I get a private transfer to Eagle Beach only?", answer: "Yes. Private transfers can be booked to any address, including Eagle Beach hotels. One-way or round-trip; specify your hotel when you book." },
+    ],
+  },
+  {
+    categorySlug: "airport-transfers-in-aruba",
+    slug: "airport-transfer-with-tour",
+    title: "Airport transfer with tour in Aruba",
+    description:
+      "Combine your Aruba airport pickup with a guided island tour—see the California Lighthouse, Ayo rocks, and coastal sights on the way to your hotel. Perfect for early arrivals, first-time visitors, and travelers with a later check-in.",
+    picks: [
+      { slug: "aycaramba-transfer-private-tour", whyWePickIt: "AyCaramba combines airport pickup with a private island tour. Your driver meets you at the airport and takes you to key sights—lighthouse, rock formations, coastal views—before dropping you at your hotel. A great start to your holiday.", bestFor: ["See the island on arrival day", "First-time visitors", "Early arrival with time to fill"] },
+      { slug: "private-transfers-aruba", whyWePickIt: "Flexible private transfers that can sometimes include a short stop or custom route. Ideal if you want a private car and the option to add a quick sightseeing stop on the way to your hotel.", bestFor: ["Private car with flexibility", "Possible custom stop", "Airport and beyond"] },
+    ],
+    intro: "An airport transfer with a tour in Aruba turns your arrival into an experience. Instead of going straight to your hotel, you're picked up at the airport and taken to key sights—such as the California Lighthouse, Ayo or Casibari rocks, or coastal viewpoints—before being dropped at your accommodation. Perfect for early landings, first-time visitors, or when you have a later check-in and time to spare.",
+    whyBlock: {
+      title: "Why combine an airport transfer with a tour in Aruba?",
+      content:
+        "If your flight lands in the morning or midday and your hotel check-in is later, a transfer with a tour makes use of that time. You're picked up at the airport, shown key sights—lighthouse, rock formations, coastal views—with commentary and photo stops, then dropped at your hotel. First-time visitors get an introduction to the island without an extra day trip; everyone avoids a wasted half-day. One booking covers transport and a guided taste of Aruba.",
+    },
+    whatToExpect: [
+      "Your driver/guide meets you at the airport with a sign. You'll have a private vehicle for the duration.",
+      "You'll make several stops at iconic Aruba sights. Commentary and photo opportunities are typically included.",
+      "After the tour, you're dropped at your hotel or address. Total duration is usually a few hours—confirm when you book.",
+    ],
+    faqs: [
+      { question: "How long is an airport transfer with tour in Aruba?", answer: "Typically a few hours—long enough for several stops (e.g. lighthouse, rock formations, coastal views) before hotel drop-off. Your confirmation will state the approximate duration." },
+      { question: "Is transfer with tour good if my flight is delayed?", answer: "Operators often track your flight and adjust. If you're very late, the tour portion might be shortened so you still get to your hotel at a reasonable time. Confirm their policy when you book." },
+      { question: "Can I customize the tour stops?", answer: "Many private transfer-and-tour options allow some flexibility. Discuss your preferences (e.g. must-see sights) when you book or with your driver on the day." },
+      { question: "Is this suitable for a late afternoon arrival?", answer: "It depends on the operator and how much daylight you have. Morning or midday arrivals give you the most time for sights. For late afternoon, a standard transfer might be better unless the operator offers a shorter \"highlights\" route." },
+      { question: "Do I need to book in advance for transfer with tour?", answer: "Yes. Transfer-and-tour combos require coordination (vehicle, guide, route). Book at least 24–48 hours ahead; more in peak season." },
     ],
   },
 ];
