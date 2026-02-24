@@ -60,35 +60,83 @@ export function TourListingTemplate({
   const priceDisplay = liveData?.fromPriceDisplay ?? "Price from (see options)";
   const bookUrl = liveData?.productUrl ?? "#";
 
-  const productSchema = liveData ? (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Product",
-          name: displayTitle,
-          description: listing.metaDescription,
-          brand: { "@type": "Organization", name: listing.operator },
-          ...(liveData.imageUrl && { image: liveData.imageUrl }),
-          ...(hasRating &&
-            hasReviews && {
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: liveData.rating,
-                reviewCount: liveData.reviewCount,
+  // Numeric price for Merchant listings structured data (required by Google)
+  const numericPrice =
+    (typeof liveData?.fromPrice === "number" && liveData.fromPrice) ||
+    (() => {
+      const s = liveData?.fromPriceDisplay ?? "";
+      const m = s.match(/\$?\s*(\d+(?:,\d{3})*(?:\.\d{2})?)/);
+      return m ? parseFloat(m[1].replace(/,/g, "")) : undefined;
+    })();
+
+  // priceValidUntil: last day of next month (ISO YYYY-MM-DD) for Product snippets
+  const priceValidUntil = (() => {
+    const d = new Date();
+    d.setMonth(d.getMonth() + 2);
+    d.setDate(0);
+    return d.toISOString().slice(0, 10);
+  })();
+
+  const productSchema =
+    liveData && typeof numericPrice === "number" ? (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: displayTitle,
+            description: listing.metaDescription,
+            brand: { "@type": "Brand", name: listing.operator },
+            ...(liveData.imageUrl && { image: liveData.imageUrl }),
+            ...(hasRating &&
+              hasReviews && {
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: liveData.rating,
+                  reviewCount: liveData.reviewCount,
+                },
+              }),
+            offers: {
+              "@type": "Offer",
+              url: bookUrl,
+              price: numericPrice,
+              priceCurrency: "USD",
+              priceValidUntil,
+              priceSpecification: {
+                "@type": "PriceSpecification",
+                price: numericPrice,
+                priceCurrency: "USD",
               },
-            }),
-          offers: {
-            "@type": "Offer",
-            url: bookUrl,
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-          },
-        }),
-      }}
-    />
-  ) : null;
+              availability: "https://schema.org/InStock",
+              hasMerchantReturnPolicy: {
+                "@type": "MerchantReturnPolicy",
+                returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+                merchantReturnDays: 30,
+                returnFees: "https://schema.org/FreeReturn",
+              },
+              shippingDetails: {
+                "@type": "ShippingDetails",
+                shippingRate: {
+                  "@type": "MonetaryAmount",
+                  value: 0,
+                  currency: "USD",
+                },
+                deliveryTime: {
+                  "@type": "DeliveryTimeSpecification",
+                  handlingTime: {
+                    "@type": "QuantitativeValue",
+                    minValue: 0,
+                    maxValue: 1,
+                    unitCode: "DAY",
+                  },
+                },
+              },
+            },
+          }),
+        }}
+      />
+    ) : null;
 
   return (
     <article className="min-h-screen bg-white">

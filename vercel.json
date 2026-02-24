@@ -1,0 +1,12 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://aru365.com/:path*",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "www.aru365.com" }
+      ]
+    }
+  ]
+}

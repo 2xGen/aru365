@@ -23,6 +23,8 @@ export interface ViatorProductSummary {
   title: string;
   productUrl: string;
   fromPriceDisplay: string;
+  /** Numeric "from" price when available (for structured data). */
+  fromPrice?: number;
   reviewCount: number;
   rating: number;
   imageUrl: string | null;
@@ -213,6 +215,7 @@ function mapBulkItemToSummary(item: ViatorBulkItem): ViatorProductSummary | null
     title: item.title ?? "Tour",
     productUrl: item.productUrl,
     fromPriceDisplay,
+    ...(typeof priceFrom === "number" && { fromPrice: priceFrom }),
     reviewCount: totalReviews,
     rating: averageRating,
     imageUrl: firstImage ?? null,
@@ -396,6 +399,7 @@ export async function fetchProductsBulk(
     const fromPrice = priceMap.get(summary.productCode);
     if (typeof fromPrice === "number") {
       summary.fromPriceDisplay = `Price from $${Math.round(fromPrice)}`;
+      summary.fromPrice = fromPrice;
     }
   }
 
