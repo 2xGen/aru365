@@ -219,21 +219,23 @@ export function TourListingTemplate({
                   )}
                 </div>
               )}
-              <p className="mt-3 text-lg font-semibold text-slate-900">{priceDisplay}</p>
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
+                <p className="text-lg font-semibold text-slate-900">{priceDisplay}</p>
+                <a
+                  href={bookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-white bg-aru-orange hover:bg-aru-orange-dark transition-colors shadow-md hover:shadow-lg"
+                >
+                  View options &amp; book
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
               {liveData?.freeCancellation && (
                 <p className="mt-1 text-emerald-600 text-sm font-medium">Free cancellation</p>
               )}
-              <a
-                href={bookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-white bg-aru-orange hover:bg-aru-orange-dark transition-colors shadow-md hover:shadow-lg"
-              >
-                View options &amp; book
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
               <p className="mt-3 text-sm text-slate-500">
                 Powered by Viator
               </p>
