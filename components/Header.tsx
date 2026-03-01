@@ -62,7 +62,7 @@ export function Header() {
               Home
             </Link>
             <Link href="/best-tours-in-aruba" className={navLinkClass(isBestTours)}>
-              By category
+              Top picks
             </Link>
             <Link href="/tours-excursions" className={navLinkClass(isToursExcursions)}>
               All tours
@@ -138,7 +138,7 @@ export function Header() {
           className={`sm:hidden overflow-hidden transition-[max-height] duration-200 ease-out ${mobileMenuOpen ? "max-h-[80vh]" : "max-h-0"}`}
           aria-hidden={!mobileMenuOpen}
         >
-          <div className="pb-4 pt-2 border-t border-slate-200/80 space-y-1">
+          <div className="pb-4 pt-2 border-t border-slate-200/80 space-y-1 overflow-y-auto max-h-[calc(80vh-4rem)]">
             <Link
               href="/"
               className={`block px-3 py-3 rounded-lg ${navLinkClass(isHome)}`}
@@ -151,7 +151,7 @@ export function Header() {
               className={`block px-3 py-3 rounded-lg ${navLinkClass(isBestTours)}`}
               onClick={() => setMobileMenuOpen(false)}
             >
-              By category
+              Top picks
             </Link>
             <Link
               href="/tours-excursions"
