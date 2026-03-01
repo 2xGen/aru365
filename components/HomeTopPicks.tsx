@@ -84,13 +84,15 @@ export function HomeTopPicks({ topPicks = [] }: Props) {
             );
           })}
         </div>
-        <div className="mt-10">
+        <div className="mt-10 flex justify-center">
           <Link
-            href="/best-tours-in-aruba"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-aru-orange hover:text-aru-orange-dark transition-colors"
+            href="/tours-excursions"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-aru-cyan hover:bg-aru-cyan-dark transition-colors shadow-sm"
           >
-            View all tours in Aruba
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            View all tours
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </Link>
         </div>
       </div>

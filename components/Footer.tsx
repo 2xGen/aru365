@@ -28,6 +28,44 @@ export function Footer() {
               <span className="text-slate-400 text-sm sm:text-base mt-3 block">
                 Everything Aruba. <span className="text-aru-cyan/90 font-medium">365 Days a Year.</span>
               </span>
+              <p className="text-slate-500 text-xs mt-4 flex flex-wrap items-center justify-center gap-x-1 gap-y-1">
+                <span className="text-slate-600">More destinations:</span>
+                <a
+                  href="https://lon365.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-aru-cyan transition-colors"
+                >
+                  London
+                </a>
+                <span className="text-slate-600">·</span>
+                <a
+                  href="https://tyo365.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-aru-cyan transition-colors"
+                >
+                  Tokyo
+                </a>
+                <span className="text-slate-600">·</span>
+                <a
+                  href="https://prg365.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-aru-cyan transition-colors"
+                >
+                  Prague
+                </a>
+                <span className="text-slate-600">·</span>
+                <a
+                  href="https://cur365.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-aru-cyan transition-colors"
+                >
+                  Curaçao
+                </a>
+              </p>
             </div>
 
             {/* Categories */}

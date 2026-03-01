@@ -29,6 +29,7 @@ export function Header() {
 
   const isHome = pathname === "/";
   const isBestTours = pathname === "/best-tours-in-aruba";
+  const isToursExcursions = pathname === "/tours-excursions";
   const isPartner = pathname === "/partner";
 
   return (
@@ -56,6 +57,12 @@ export function Header() {
               className={`text-sm font-medium transition-colors hidden sm:inline-block ${isBestTours ? "text-aru-orange" : "text-slate-600 hover:text-slate-900"}`}
             >
               Best tours
+            </Link>
+            <Link
+              href="/tours-excursions"
+              className={`text-sm font-medium transition-colors hidden sm:inline-block ${isToursExcursions ? "text-aru-orange" : "text-slate-600 hover:text-slate-900"}`}
+            >
+              All tours
             </Link>
 
             <div className="relative" ref={dropdownRef}>

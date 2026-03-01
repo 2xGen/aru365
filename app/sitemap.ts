@@ -8,6 +8,11 @@ import { getGuideSlugsByCategory } from "@/data/guides";
 
 const SITE_URL = "https://aru365.com";
 
+const HIDDEN_CATEGORIES = ["things-to-do-in-aruba-with-kids"];
+const TOURS_EXCURSIONS_CATEGORIES = categorySlugsWithListings.filter(
+  (s) => !HIDDEN_CATEGORIES.includes(s)
+);
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = new Date();
 
@@ -19,6 +24,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.9,
     },
+    {
+      url: `${SITE_URL}/tours-excursions`,
+      lastModified: base,
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
+    ...TOURS_EXCURSIONS_CATEGORIES.map((slug) => ({
+      url: `${SITE_URL}/tours-excursions?category=${encodeURIComponent(slug)}`,
+      lastModified: base,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
     {
       url: `${SITE_URL}/partner`,
       lastModified: base,

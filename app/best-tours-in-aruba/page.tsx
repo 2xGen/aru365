@@ -214,6 +214,17 @@ export default async function BestToursPage() {
                 );
               })}
             </div>
+            <div className="mt-10 flex justify-center">
+              <Link
+                href="/tours-excursions"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-aru-cyan hover:bg-aru-cyan-dark transition-colors shadow-sm"
+              >
+                View all tours
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
           </section>
 
           {/* Browse by category */}

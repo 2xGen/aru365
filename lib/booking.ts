@@ -30,7 +30,8 @@ export function getCategoryBookUrl(_categorySlug?: string): string {
 
 /**
  * Viator product booking URL in www.viator.com format (reliable; avoids shop.live.rc.viator.com 500s).
- * Format: https://www.viator.com/Aruba/d28-ttd/p-{productCode}?mcid=...&pid=...&medium=api&api_version=2.0
+ * Format: https://www.viator.com/Aruba/d28-ttd/p-{productCode}?mcid=...&pid=...&medium=api&api_version=2.0&campaign=aru
+ * campaign=aru lets you attribute traffic from this site in Viator reporting.
  */
 export function getViatorProductBookUrl(productCode: string): string {
   const params = new URLSearchParams({
@@ -38,6 +39,7 @@ export function getViatorProductBookUrl(productCode: string): string {
     pid: VIATOR_PID,
     medium: "api",
     api_version: "2.0",
+    campaign: "aru",
   });
   return `https://www.viator.com/Aruba/d28-ttd/p-${productCode}?${params.toString()}`;
 }
