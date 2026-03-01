@@ -35,6 +35,18 @@ export function Header() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   const isHome = pathname === "/";
   const isBestTours = pathname === "/best-tours-in-aruba";
   const isToursExcursions = pathname === "/tours-excursions";
@@ -109,64 +121,69 @@ export function Header() {
             </div>
           </div>
 
-          {/* Mobile: hamburger + slide-out menu */}
-          <div className="flex items-center gap-4 sm:hidden">
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen((o) => !o)}
-              className="p-2 -mr-2 text-slate-600 hover:text-slate-900 rounded-lg aria-expanded:bg-slate-100"
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-nav"
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {mobileMenuOpen ? (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </button>
-          </div>
+          {/* Mobile: hamburger button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((o) => !o)}
+            className="sm:hidden p-2 -mr-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileMenuOpen ? (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </nav>
+      </div>
 
-        {/* Mobile nav panel */}
-        <div
-          id="mobile-nav"
-          className={`sm:hidden overflow-hidden transition-[max-height] duration-200 ease-out ${mobileMenuOpen ? "max-h-[80vh]" : "max-h-0"}`}
-          aria-hidden={!mobileMenuOpen}
-        >
-          <div className="pb-4 pt-2 border-t border-slate-200/80 space-y-1 overflow-y-auto max-h-[calc(80vh-4rem)]">
+      {/* Mobile menu panel */}
+      <div
+        id="mobile-nav"
+        className={`sm:hidden absolute inset-x-0 top-full border-b border-slate-200 bg-white shadow-lg overflow-y-auto transition-all duration-200 ease-out ${
+          mobileMenuOpen ? "max-h-[min(85vh,600px)] opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!mobileMenuOpen}
+      >
+        <div className="container mx-auto px-4 py-3 pb-6">
+          <div className="flex flex-col gap-1 py-2">
             <Link
               href="/"
-              className={`block px-3 py-3 rounded-lg ${navLinkClass(isHome)}`}
               onClick={() => setMobileMenuOpen(false)}
+              className={`px-4 py-3 rounded-lg text-sm font-medium ${isHome ? "text-aru-orange bg-slate-100" : "text-slate-700 hover:bg-slate-100"}`}
             >
               Home
             </Link>
             <Link
               href="/best-tours-in-aruba"
-              className={`block px-3 py-3 rounded-lg ${navLinkClass(isBestTours)}`}
               onClick={() => setMobileMenuOpen(false)}
+              className={`px-4 py-3 rounded-lg text-sm font-medium ${isBestTours ? "text-aru-orange bg-slate-100" : "text-slate-700 hover:bg-slate-100"}`}
             >
               Top picks
             </Link>
             <Link
               href="/tours-excursions"
-              className={`block px-3 py-3 rounded-lg ${navLinkClass(isToursExcursions)}`}
               onClick={() => setMobileMenuOpen(false)}
+              className={`px-4 py-3 rounded-lg text-sm font-medium ${isToursExcursions ? "text-aru-orange bg-slate-100" : "text-slate-700 hover:bg-slate-100"}`}
             >
               All tours
             </Link>
-            <div className="pt-2 mt-2 border-t border-slate-100">
+          </div>
+          <div className="border-t border-slate-200 mt-2 pt-3">
+            <p className="px-4 py-1 text-xs font-semibold uppercase tracking-wider text-slate-400">Categories</p>
+            <div className="rounded-lg overflow-hidden border border-slate-200">
               {navPillars.map((p) => (
                 <Link
                   key={p.slug}
                   href={`/${p.slug}`}
-                  className="block px-3 py-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900"
                   onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-4 py-3 text-sm font-medium border-b border-slate-100 last:border-0 ${pathname === `/${p.slug}` ? "text-aru-orange bg-slate-50/50" : "text-slate-700 hover:bg-slate-50"}`}
                 >
                   {navCategoryLabel(p.title)}
                 </Link>
