@@ -62,7 +62,7 @@ export function Header() {
               Home
             </Link>
             <Link href="/best-tours-in-aruba" className={navLinkClass(isBestTours)}>
-              Best tours
+              By category
             </Link>
             <Link href="/tours-excursions" className={navLinkClass(isToursExcursions)}>
               All tours
@@ -151,7 +151,7 @@ export function Header() {
               className={`block px-3 py-3 rounded-lg ${navLinkClass(isBestTours)}`}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Best tours
+              By category
             </Link>
             <Link
               href="/tours-excursions"
@@ -161,9 +161,6 @@ export function Header() {
               All tours
             </Link>
             <div className="pt-2 mt-2 border-t border-slate-100">
-              <p className="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                Categories
-              </p>
               {navPillars.map((p) => (
                 <Link
                   key={p.slug}
