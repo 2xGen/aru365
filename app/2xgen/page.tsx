@@ -7,13 +7,43 @@ const DEFAULT_OG_IMAGE =
 export const metadata: Metadata = {
   title: "2xGen LLC – Next-gen digital platforms",
   description:
-    "2xGen builds and operates digital platforms: TopTours.ai, ArubaBuddies, FactuurBaas, OneHappyFinance, AruList, and more.",
+    "2xGen builds and operates digital platforms: Tyo365, Prg365, Aru365, Lon365, Cur365, TopTours.ai, ArubaBuddies, FactuurBaas, OneHappyFinance, AruList, and more.",
   openGraph: {
     images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Aru365 – Tours and excursions in Aruba" }],
   },
 };
 
 const platforms = [
+  {
+    name: "Tyo365",
+    description: "Best tours and experiences in Tokyo – compare, browse, and book",
+    url: "https://tyo365.com",
+    domain: "tyo365.com",
+  },
+  {
+    name: "Prg365",
+    description: "Best tours and experiences in Prague – compare, browse, and book",
+    url: "https://prg365.com",
+    domain: "prg365.com",
+  },
+  {
+    name: "Aru365",
+    description: "Best tours and experiences in Aruba – compare, browse, and book",
+    url: "https://aru365.com",
+    domain: "aru365.com",
+  },
+  {
+    name: "Lon365",
+    description: "Best tours and experiences in London – compare, browse, and book",
+    url: "https://lon365.com",
+    domain: "lon365.com",
+  },
+  {
+    name: "Cur365",
+    description: "Best tours and experiences in Curaçao – compare, browse, and book",
+    url: "https://cur365.com",
+    domain: "cur365.com",
+  },
   {
     name: "TopTours.ai",
     description: "AI-powered discovery for global travel experiences",
@@ -55,12 +85,6 @@ const platforms = [
     description: "AI-driven local profile management for businesses",
     url: "https://mygoprofile.com",
     domain: "mygoprofile.com",
-  },
-  {
-    name: "BiteReserve",
-    description: "Track exactly which guest sources send revenue, no guessing",
-    url: "https://bitereserve.com",
-    domain: "bitereserve.com",
   },
 ];
 
