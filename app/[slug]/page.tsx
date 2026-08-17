@@ -20,8 +20,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isPillarSlug(slug)) return {};
   const pillar = getPillarBySlug(slug);
   if (!pillar) return {};
-  const title = `Book ${pillar.title} | Aru365`;
-  const description = `${pillar.description} Compare options and book with free cancellation.`;
+  const title = `${pillar.title} | Aru365`;
+  const description = pillar.description.endsWith(".")
+    ? pillar.description
+    : `${pillar.description}.`;
   return {
     title,
     description,

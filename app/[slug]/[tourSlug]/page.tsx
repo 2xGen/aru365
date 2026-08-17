@@ -165,6 +165,11 @@ export default async function CategorySubPage({ params }: Props) {
   if (!liveData) {
     const staticMain = getStaticProductSummaries([listing.productCode], categorySlug)[0];
     if (staticMain) liveData = staticMain;
+  } else if (!liveData.imageUrl) {
+    const staticMain = getStaticProductSummaries([listing.productCode], categorySlug)[0];
+    if (staticMain?.imageUrl) {
+      liveData = { ...liveData, imageUrl: staticMain.imageUrl };
+    }
   }
   // Always use www.viator.com product URL (not shop.live.rc.viator.com) so booking links work
   if (liveData) {

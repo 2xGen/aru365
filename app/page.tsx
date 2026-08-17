@@ -16,9 +16,9 @@ const DEFAULT_OG_IMAGE =
   "https://soaacpusdhyxwucjhhpy.supabase.co/storage/v1/object/public/aru365/aru365%20tours%20and%20excursions%20in%20aruba.png";
 
 export const metadata: Metadata = {
-  title: "Aru365 – Book Best Tours in Aruba | Catamaran, Snorkeling, ATV, Sunset Cruises",
+  title: "Aru365 – Best Tours in Aruba | Catamaran, Snorkeling, Sunset Cruises & ATV Tours",
   description:
-    "Aruba's dedicated platform for booking the best tours and excursions. Find, compare, and book snorkeling tours, sunset cruises, ATV adventures, and more — all in one place.",
+    "Book the best tours and excursions in Aruba. Compare catamaran cruises, snorkeling tours, jet ski rentals, ATV adventures, sunset dinner cruises, and private boat charters — all in one place.",
   openGraph: {
     url: SITE_URL,
     images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Aru365 – Tours and excursions in Aruba" }],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 /** Home shows one tour per category using the second pick (index 1) so it differs from best-tours-in-aruba (first pick). */
-const HIDDEN_ON_HOMEPAGE = ["airport-transfers-in-aruba", "things-to-do-in-aruba-with-kids"];
+const HIDDEN_ON_HOMEPAGE = ["airport-transfers-in-aruba"];
 const CATEGORY_SLUGS = (Object.keys(pillarProductCodes) as string[]).filter((s) => !HIDDEN_ON_HOMEPAGE.includes(s));
 const PICK_INDEX = 1;
 

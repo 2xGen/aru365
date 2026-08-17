@@ -18,6 +18,28 @@ const generatedByCode = generatedStatic as Record<
   { title: string; fromPriceDisplay: string; rating: number; reviewCount: number; imageUrl: string | null; freeCancellation: boolean; productUrl?: string | null }
 >;
 
+/** Manual image overrides when Viator dump/API omits imageUrl (key: categorySlug:productCode). */
+const imageOverridesByCategoryAndCode: Record<string, string> = {
+  "sunset-and-dinner-cruises-in-aruba:8936P5":
+    "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/12/e7/8b/a3.jpg",
+  "romantic-experiences-in-aruba:8936P5":
+    "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/11/d7/54/3b.jpg",
+  "atv-and-jeep-tours-in-aruba:137607P10":
+    "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/07/d7/71/89.jpg",
+  "airport-transfers-in-aruba:2455AUAAPTRND":
+    "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/07/b8/49/2a.jpg",
+};
+
+function resolveImageUrl(
+  categorySlug: string,
+  productCode: string,
+  imageUrl: string | null | undefined
+): string | null {
+  const override = imageOverridesByCategoryAndCode[`${categorySlug}:${productCode}`];
+  if (override) return override;
+  return imageUrl ?? null;
+}
+
 /**
  * Returns the Viator booking URL for a product in www.viator.com format (not shop.live.rc.viator.com).
  * Use for "View options & book" on single tour pages and anywhere we need a product booking link.
@@ -127,7 +149,8 @@ const staticByCode: Record<
     fromPriceDisplay: "Price from (see options)",
     rating: 0,
     reviewCount: 0,
-    imageUrl: null,
+    imageUrl:
+      "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/12/e7/8b/a3.jpg",
   },
   "245508": {
     title: "Palm Pleasure Sunset Sail",
@@ -194,7 +217,14 @@ const staticByCode: Record<
   // ATV
   "6841P7": { title: "Natural Pool and Cave Explorer", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
   "6687ATV": { title: "Aruba ATV Tour", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
-  "137607P10": { title: "Aruba ATV Tours Single and Double Seater 4-Hour Tour", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
+  "137607P10": {
+    title: "Aruba ATV Tours Single and Double Seater 4-Hour Tour",
+    fromPriceDisplay: "Price from (see options)",
+    rating: 0,
+    reviewCount: 0,
+    imageUrl:
+      "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/07/d7/71/89.jpg",
+  },
   "47774P3": { title: "Aruba's Secret Beach and Cave Pool UTV and ATV Adventure", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
   // Island sightseeing
   "6593P16": { title: "Aruba Natural Wonders Jeep Tour Caves and Natural Pool", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
@@ -222,7 +252,14 @@ const staticByCode: Record<
   "5492822P1": { title: "Private Round Trip Airport Transfer", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
   // Airport transfers (Aruba) — fallback until you run dump; run `node scripts/dump-static-product-summaries.mjs` for Viator images & live prices
   "12431P5": { title: "Private Airport Transportation Services", fromPriceDisplay: "Price from $45", rating: 0, reviewCount: 0, imageUrl: null },
-  "2455AUAAPTRND": { title: "Roundtrip Aruba Airport Transfer", fromPriceDisplay: "Price from $75", rating: 0, reviewCount: 0, imageUrl: null },
+  "2455AUAAPTRND": {
+    title: "Roundtrip Aruba Airport Transfer",
+    fromPriceDisplay: "Price from $75",
+    rating: 0,
+    reviewCount: 0,
+    imageUrl:
+      "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/07/b8/49/2a.jpg",
+  },
   "332620P2": { title: "Private Transfers", fromPriceDisplay: "Price from $40", rating: 0, reviewCount: 0, imageUrl: null },
   "242476P1": { title: "AyCaramba Transfer and Private Tour Aruba", fromPriceDisplay: "Price from $120", rating: 0, reviewCount: 0, imageUrl: null },
   "3046AUAAPTRND": { title: "Roundtrip Aruba Airport Private Transfer", fromPriceDisplay: "Price from $80", rating: 0, reviewCount: 0, imageUrl: null },
@@ -275,7 +312,7 @@ export function getStaticProductSummaries(
       fromPriceDisplay: data.fromPriceDisplay,
       reviewCount: data.reviewCount,
       rating: data.rating,
-      imageUrl: data.imageUrl ?? null,
+      imageUrl: resolveImageUrl(categorySlug, code, data.imageUrl),
       freeCancellation: data.freeCancellation ?? false,
     });
   }

@@ -4,10 +4,10 @@ import Link from "next/link";
 import { pillars } from "@/data/pillars";
 import { CategoryIcon } from "./icons/CategoryIcons";
 
-const HIDDEN_ON_HOMEPAGE = ["things-to-do-in-aruba-with-kids"] as const;
+const HIDDEN_ON_HOMEPAGE = [] as const;
 
 export function HomeCategories() {
-  const visible = pillars.filter((p) => !HIDDEN_ON_HOMEPAGE.includes(p.slug as typeof HIDDEN_ON_HOMEPAGE[number]));
+  const visible = pillars.filter((p) => !(HIDDEN_ON_HOMEPAGE as readonly string[]).includes(p.slug));
   return (
     <section
       id="categories"

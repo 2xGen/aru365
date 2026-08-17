@@ -32,3 +32,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# export for TopTours/other import (regenerate with npm run export:aruba)
+aruba-export.json

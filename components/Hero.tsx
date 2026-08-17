@@ -30,7 +30,7 @@ export function Hero() {
             className="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto opacity-0 animate-fade-in-up"
             style={{ animationDelay: "0.35s", animationFillMode: "forwards" }}
           >
-            Catamaran cruises, snorkeling, ATV adventures, sunset sails &amp; more. Compare options and book with free cancellation.
+            Catamaran cruises, snorkeling, jet ski rentals, ATV &amp; UTV tours, sunset dinner cruises &amp; more. Compare options and book with free cancellation.
           </p>
           <div
             className="mt-10 opacity-0 animate-fade-in-up"
