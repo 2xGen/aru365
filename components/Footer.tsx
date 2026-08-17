@@ -68,6 +68,18 @@ export function Footer() {
               </p>
             </div>
 
+            {/* Browse hubs */}
+            <div className="w-full pt-2">
+              <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium" aria-label="Browse tours">
+                <Link href="/best-tours-in-aruba" className="text-slate-300 hover:text-aru-cyan transition-colors">
+                  Top picks
+                </Link>
+                <Link href="/tours-excursions" className="text-slate-300 hover:text-aru-cyan transition-colors">
+                  All tours &amp; excursions
+                </Link>
+              </nav>
+            </div>
+
             {/* Categories */}
             <div className="w-full pt-6 border-t border-slate-700/80">
               <p className="text-slate-400 text-sm font-medium mb-3 flex items-center justify-center gap-2">
@@ -81,7 +93,7 @@ export function Footer() {
                     href={`/${p.slug}`}
                     className="text-slate-400 hover:text-aru-cyan transition-colors py-0.5 border-b border-transparent hover:border-aru-cyan/50"
                   >
-                    {p.title}
+                    {p.title.split("|")[0].trim()}
                   </Link>
                 ))}
               </nav>

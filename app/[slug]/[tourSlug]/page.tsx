@@ -4,11 +4,11 @@ import {
   getTourListingsByCategory,
   categorySlugsWithListings,
 } from "@/data/listings";
-import { getGuide, getGuideSlugsByCategory, getRelatedGuides } from "@/data/guides";
+import { getGuide, getGuideSlugsByCategory, getRelatedGuides, getAllGuideCategorySlugs } from "@/data/guides";
+import type { GuidePick } from "@/data/guides";
 import { getPillarBySlug } from "@/data/pillars";
 import { getStaticProductSummaries, getViatorProductUrl } from "@/data/staticProductSummaries";
 import { fetchProductsBulk, fetchProductDetails } from "@/lib/viator-api";
-import { getCategoryBookUrl } from "@/lib/booking";
 import { TourListingTemplate } from "@/components/TourListingTemplate";
 import { GuideTemplate } from "@/components/GuideTemplate";
 import { Footer } from "@/components/Footer";
@@ -22,20 +22,32 @@ type Props = {
   params: Promise<{ slug: string; tourSlug: string }>;
 };
 
+function getCategoryLabel(title: string | undefined, fallback: string): string {
+  return title?.split("|")[0].trim() ?? fallback;
+}
+
+function resolvePickListing(categorySlug: string, pick: GuidePick) {
+  const tourCategorySlug = pick.tourCategorySlug ?? categorySlug;
+  return {
+    tourCategorySlug,
+    listing: getTourListing(tourCategorySlug, pick.slug),
+  };
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug: categorySlug, tourSlug } = await params;
   const pillar = getPillarBySlug(categorySlug);
-  const categoryTitle = pillar?.title ?? categorySlug;
+  const categoryLabel = getCategoryLabel(pillar?.title, categorySlug);
   const pageUrl = `${SITE_URL}/${categorySlug}/${tourSlug}`;
-  const ogImages = [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Aru365 – Tours and excursions in Aruba" }];
+  const defaultOgImages = [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Aru365 – Tours and excursions in Aruba" }];
 
   const guide = getGuide(categorySlug, tourSlug);
   if (guide) {
-    const title = `${guide.title} | ${categoryTitle} | Aru365`;
+    const title = `${guide.title} | ${categoryLabel} | Aru365`;
     return {
       title,
       description: guide.description,
-      openGraph: { title, description: guide.description, url: pageUrl, images: ogImages },
+      openGraph: { title, description: guide.description, url: pageUrl, images: defaultOgImages },
       alternates: { canonical: pageUrl },
     };
   }
@@ -43,7 +55,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const listing = getTourListing(categorySlug, tourSlug);
   if (!listing) return {};
   const displayTitle = listing.seoTitle ?? `${listing.operator} — ${listing.angle}`;
-  const title = `${displayTitle} | ${categoryTitle} | Aru365`;
+  const title = `${displayTitle} | ${categoryLabel} | Aru365`;
+  const staticSummary = getStaticProductSummaries([listing.productCode], categorySlug)[0];
+  const ogImages = staticSummary?.imageUrl
+    ? [{ url: staticSummary.imageUrl, width: 1200, height: 630, alt: displayTitle }]
+    : defaultOgImages;
   return {
     title,
     description: listing.metaDescription,
@@ -54,16 +70,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const params: { slug: string; tourSlug: string }[] = [];
+  const seen = new Set<string>();
+
   for (const categorySlug of categorySlugsWithListings) {
     const listings = getTourListingsByCategory(categorySlug);
     for (const listing of listings) {
-      params.push({ slug: categorySlug, tourSlug: listing.slug });
-    }
-    const guideSlugs = getGuideSlugsByCategory(categorySlug);
-    for (const guideSlug of guideSlugs) {
-      params.push({ slug: categorySlug, tourSlug: guideSlug });
+      const key = `${categorySlug}/${listing.slug}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        params.push({ slug: categorySlug, tourSlug: listing.slug });
+      }
     }
   }
+
+  for (const categorySlug of getAllGuideCategorySlugs()) {
+    for (const guideSlug of getGuideSlugsByCategory(categorySlug)) {
+      const key = `${categorySlug}/${guideSlug}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        params.push({ slug: categorySlug, tourSlug: guideSlug });
+      }
+    }
+  }
+
   return params;
 }
 
@@ -78,8 +107,9 @@ export default async function CategorySubPage({ params }: Props) {
   const guide = getGuide(categorySlug, tourSlug);
   if (guide) {
     const productCodesToFetch: string[] = [];
+
     for (const pick of guide.picks) {
-      const listing = getTourListing(categorySlug, pick.slug);
+      const { tourCategorySlug, listing } = resolvePickListing(categorySlug, pick);
       if (listing && !productCodesToFetch.includes(listing.productCode)) {
         productCodesToFetch.push(listing.productCode);
       }
@@ -95,21 +125,20 @@ export default async function CategorySubPage({ params }: Props) {
         const products = await fetchProductsBulk(productCodesToFetch);
         const codeToProduct = new Map(products.map((p) => [p.productCode, p]));
         for (let i = 0; i < guide.picks.length; i++) {
-          const listing = getTourListing(categorySlug, guide.picks[i].slug);
+          const { listing } = resolvePickListing(categorySlug, guide.picks[i]);
           picksWithTours[i].tour = listing ? (codeToProduct.get(listing.productCode) ?? null) : null;
         }
       } catch {
         // Use placeholder when API fails
       }
-      // When API is off or failed: fill from static summaries so guide picks show image, title, price
       const anyMissing = picksWithTours.some((p) => !p.tour);
       if (anyMissing) {
-        const staticSummaries = getStaticProductSummaries(productCodesToFetch, categorySlug);
-        const codeToProduct = new Map(staticSummaries.map((s) => [s.productCode, s]));
         for (let i = 0; i < guide.picks.length; i++) {
           if (picksWithTours[i].tour) continue;
-          const listing = getTourListing(categorySlug, guide.picks[i].slug);
-          if (listing) picksWithTours[i].tour = codeToProduct.get(listing.productCode) ?? null;
+          const { tourCategorySlug, listing } = resolvePickListing(categorySlug, guide.picks[i]);
+          if (!listing) continue;
+          const staticSummary = getStaticProductSummaries([listing.productCode], tourCategorySlug)[0];
+          if (staticSummary) picksWithTours[i].tour = staticSummary;
         }
       }
     }
@@ -165,10 +194,21 @@ export default async function CategorySubPage({ params }: Props) {
   if (!liveData) {
     const staticMain = getStaticProductSummaries([listing.productCode], categorySlug)[0];
     if (staticMain) liveData = staticMain;
-  } else if (!liveData.imageUrl) {
+  } else {
     const staticMain = getStaticProductSummaries([listing.productCode], categorySlug)[0];
-    if (staticMain?.imageUrl) {
-      liveData = { ...liveData, imageUrl: staticMain.imageUrl };
+    if (staticMain) {
+      const patch: Partial<typeof liveData> = {};
+      if (!liveData.imageUrl && staticMain.imageUrl) patch.imageUrl = staticMain.imageUrl;
+      const livePriceMissing =
+        !liveData.fromPriceDisplay || liveData.fromPriceDisplay.includes("(see options)");
+      const staticPriceOk =
+        staticMain.fromPriceDisplay && !staticMain.fromPriceDisplay.includes("(see options)");
+      if (livePriceMissing && staticPriceOk) patch.fromPriceDisplay = staticMain.fromPriceDisplay;
+      if ((liveData.rating ?? 0) <= 0 && (staticMain.rating ?? 0) > 0) {
+        patch.rating = staticMain.rating;
+        patch.reviewCount = staticMain.reviewCount;
+      }
+      if (Object.keys(patch).length > 0) liveData = { ...liveData, ...patch };
     }
   }
   // Always use www.viator.com product URL (not shop.live.rc.viator.com) so booking links work

@@ -26,9 +26,9 @@ const playfair = Playfair_Display({
 const SITE_URL = "https://aru365.com";
 const DEFAULT_OG_IMAGE =
   "https://soaacpusdhyxwucjhhpy.supabase.co/storage/v1/object/public/aru365/aru365%20tours%20and%20excursions%20in%20aruba.png";
-const defaultTitle = "Aru365 – Book Best Tours in Aruba | Catamaran, Snorkeling, ATV, Sunset Cruises";
+const defaultTitle = "Aru365 – Best Tours in Aruba | Catamaran, Snorkeling, Sunset Cruises & ATV Tours";
 const defaultDescription =
-  "Aruba's dedicated platform for booking the best tours and excursions. Find, compare, and book snorkeling tours, sunset cruises, ATV adventures, and more — all in one place.";
+  "Book the best tours and excursions in Aruba. Compare catamaran cruises, snorkeling tours, jet ski rentals, ATV adventures, sunset dinner cruises, and private boat charters — all in one place.";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -46,11 +46,6 @@ const websiteSchema = {
   url: SITE_URL,
   description: defaultDescription,
   publisher: { "@type": "Organization", name: "Aru365", url: SITE_URL },
-  potentialAction: {
-    "@type": "SearchAction",
-    target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/best-tours-in-aruba?q={search_term_string}` },
-    "query-input": "required name=search_term_string",
-  },
 };
 
 export const metadata: Metadata = {

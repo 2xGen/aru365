@@ -33,7 +33,7 @@ export function Hero() {
             Catamaran cruises, snorkeling, jet ski rentals, ATV &amp; UTV tours, sunset dinner cruises &amp; more. Compare options and book with free cancellation.
           </p>
           <div
-            className="mt-10 opacity-0 animate-fade-in-up"
+            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up"
             style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
           >
             <a
@@ -44,6 +44,12 @@ export function Hero() {
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
+            </a>
+            <a
+              href="/best-tours-in-aruba"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-semibold text-aru-cyan border-2 border-aru-cyan/30 hover:border-aru-cyan hover:bg-aru-cyan/5 transition-colors min-w-[220px]"
+            >
+              Top picks in Aruba
             </a>
           </div>
         </div>

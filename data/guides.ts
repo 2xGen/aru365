@@ -6,6 +6,8 @@
 export interface GuidePick {
   /** Tour slug (links to tour listing page) */
   slug: string;
+  /** When the tour lives in a different category (e.g. family hub → snorkel tour) */
+  tourCategorySlug?: string;
   /** Short paragraph: why we recommend this as a top pick */
   whyWePickIt: string;
   /** Who this tour is best for (bullets) */
@@ -35,7 +37,7 @@ const guides: GuidePage[] = [
   {
     categorySlug: "catamaran-cruises-in-aruba",
     slug: "morning-cruises",
-    title: "Best morning catamaran cruises",
+    title: "Best morning catamaran cruises in Aruba",
     description:
       "Compare the best morning catamaran cruises in Aruba—brunch sails, early snorkel trips, and Champagne mimosas on the water. Calmer seas and better visibility make mornings ideal.",
     picks: [
@@ -110,7 +112,7 @@ const guides: GuidePage[] = [
   {
     categorySlug: "catamaran-cruises-in-aruba",
     slug: "snorkeling",
-    title: "Best snorkeling catamaran cruises",
+    title: "Best snorkeling catamaran cruises in Aruba",
     description:
       "Compare the best snorkeling catamaran cruises in Aruba—sailing and snorkeling trips to the Antilla wreck, Catalina Bay, and Malmok Reef. Equipment and instruction included.",
     picks: [
@@ -198,7 +200,7 @@ const guides: GuidePage[] = [
   {
     categorySlug: "catamaran-cruises-in-aruba",
     slug: "open-bar",
-    title: "Best open bar catamaran cruises",
+    title: "Best open bar catamaran cruises in Aruba",
     description:
       "Compare the best open bar catamaran cruises in Aruba—unlimited drinks, snorkeling, and fun on the water. Whether you call it a booze cruise or a party sail, these trips deliver.",
     picks: [
@@ -286,7 +288,7 @@ const guides: GuidePage[] = [
   {
     categorySlug: "catamaran-cruises-in-aruba",
     slug: "families",
-    title: "Best catamaran cruises for families",
+    title: "Best catamaran cruises for families in Aruba",
     description:
       "Compare the best family-friendly catamaran cruises in Aruba—pirate ship sails, water slides, snorkeling, and fun for kids and adults. Stable boats, shade, and activities everyone can enjoy.",
     picks: [
@@ -363,7 +365,7 @@ const guides: GuidePage[] = [
   {
     categorySlug: "catamaran-cruises-in-aruba",
     slug: "bbq-sails",
-    title: "Best sailing cruises with BBQ and open bar",
+    title: "Best sailing cruises with BBQ and open bar in Aruba",
     description:
       "Compare the best sailing cruises in Aruba with BBQ and open bar—grilled lunch on board, hand-crafted cocktails, and snorkeling. Sailing, delicious food, and unlimited drinks in one trip.",
     picks: [
@@ -440,7 +442,7 @@ const guides: GuidePage[] = [
   {
     categorySlug: "catamaran-cruises-in-aruba",
     slug: "best-value",
-    title: "Best value catamaran cruises",
+    title: "Best value catamaran cruises in Aruba",
     description:
       "Compare the best value catamaran cruises in Aruba—affordable sails with snorkeling, open bar, and top sites. Get more for less without sacrificing quality.",
     picks: [
@@ -3968,7 +3970,142 @@ const guides: GuidePage[] = [
       { question: "Where do these water sports take place in Aruba?", answer: "Activities typically run from a beach or marina on Aruba's coast (e.g. Palm Beach, Eagle Beach area). Your confirmation will include the exact meeting point." },
     ],
   },
+  // Family activities hub (cross-category picks)
+  {
+    categorySlug: "things-to-do-in-aruba-with-kids",
+    slug: "snorkeling",
+    title: "Best family snorkeling in Aruba",
+    description:
+      "Compare the best family-friendly snorkeling tours in Aruba — calm bays, turtle spotting, and catamaran snorkel cruises suitable for kids. Equipment and instruction included.",
+    picks: [
+      {
+        slug: "turtle-spotting-excursion-tour",
+        tourCategorySlug: "snorkeling-and-diving-in-aruba",
+        whyWePickIt:
+          "A guided turtle-spotting snorkel tour in calm water — one of the best first-time snorkel experiences for kids in Aruba. Equipment and instruction included; guides help children get comfortable in the water.",
+        bestFor: [
+          "Kids 6+ trying snorkeling for the first time",
+          "Families who want to see sea turtles in the wild",
+          "Parents who want a guided, safe snorkel experience",
+        ],
+      },
+      {
+        slug: "arusun-catamaran-sail-snorkeling",
+        tourCategorySlug: "catamaran-cruises-in-aruba",
+        whyWePickIt:
+          "The Arusun catamaran is stable, spacious, and well-suited for families. Snorkel stops, open bar for adults, soft drinks for kids, and a proven track record with thousands of reviews.",
+        bestFor: [
+          "Families who want a half-day on the water",
+          "Kids who prefer a stable boat over a speedboat",
+          "Groups who want snorkeling and sailing in one trip",
+        ],
+      },
+    ],
+    intro:
+      "Snorkeling is one of the best family activities in Aruba — warm, calm water and shallow reefs make it ideal for kids. Guided turtle-spotting tours and catamaran snorkel cruises are the top picks for families; both include equipment, life vests, and crew who help beginners.",
+    whatToExpect: [
+      "Check-in at the meeting point; kids are fitted with life vests and snorkel gear.",
+      "Brief safety instruction — guides explain how to use mask and snorkel.",
+      "Calm-water snorkel at a reef or turtle habitat; guides stay with the group.",
+      "Return to shore or boat; total duration is typically 2–4 hours.",
+    ],
+    faqs: [
+      { question: "What is the best family snorkeling tour in Aruba?", answer: "Top picks include turtle-spotting snorkel excursions and family-friendly catamaran snorkel cruises. Both offer calm water, equipment, and guides who help kids. Catamaran cruises suit families who want a stable boat and multiple activities in one trip." },
+      { question: "What age can kids snorkel in Aruba?", answer: "Many snorkel tours welcome children 6 and up; some allow younger kids with a parent. Life vests are always provided. Check each tour listing for minimum age requirements before booking." },
+    ],
+  },
+  {
+    categorySlug: "things-to-do-in-aruba-with-kids",
+    slug: "island-tours",
+    title: "Best island tours for families in Aruba",
+    description:
+      "Compare the best family-friendly island tours in Aruba — jeep safaris, bus tours, and sightseeing trips with stops at landmarks, caves, and beaches kids will love.",
+    picks: [
+      {
+        slug: "aruba-island-sightseeing-tour",
+        tourCategorySlug: "island-sightseeing-tours-in-aruba",
+        whyWePickIt:
+          "A classic island loop covering Aruba's top landmarks — California Lighthouse, rock formations, and coastal stops — in a comfortable bus or van. Suitable for all ages and a great overview for first-time visitors with kids.",
+        bestFor: [
+          "First-time visitors who want to see the island in one day",
+          "Families with kids of all ages",
+          "Anyone who prefers a guided tour over driving themselves",
+        ],
+      },
+      {
+        slug: "natural-wonders-jeep-tour-caves-natural-pool",
+        tourCategorySlug: "island-sightseeing-tours-in-aruba",
+        whyWePickIt:
+          "An off-road jeep tour to caves, the Natural Pool area, and national park — more adventure than a bus tour but still family-friendly with a guide driving. Kids love the bumpy ride and cave stops.",
+        bestFor: [
+          "Families with older kids (6+) who want a bit of adventure",
+          "Anyone who wants to see Aruba's rugged north coast",
+          "Groups who prefer a guide driving over self-drive ATV",
+        ],
+      },
+    ],
+    intro:
+      "Island tours are a great way for families to see Aruba's landmarks without the hassle of renting a car. Bus and van tours suit all ages; jeep safaris add adventure for older kids. Most include hotel pickup and stops for photos and exploring.",
+    whatToExpect: [
+      "Hotel pickup or meet at a central point — check your confirmation.",
+      "Guided drive with commentary on Aruba's history and sights.",
+      "Stops at landmarks such as California Lighthouse, rock formations, or caves.",
+      "Return to hotel or starting point; half-day tours run 3–4 hours.",
+    ],
+    faqs: [
+      { question: "Are island tours in Aruba good for kids?", answer: "Yes. Bus and van sightseeing tours are suitable for all ages. Jeep and off-road tours may have age or height requirements — check before booking. Most tours include breaks and photo stops that kids enjoy." },
+      { question: "Do family island tours include hotel pickup?", answer: "Many jeep, bus, and van tours include hotel pickup in the Palm Beach and Eagle Beach area. Your confirmation will state whether pickup is included or where to meet." },
+    ],
+  },
+  {
+    categorySlug: "things-to-do-in-aruba-with-kids",
+    slug: "water-activities",
+    title: "Best water activities for kids in Aruba",
+    description:
+      "Family-friendly water activities in Aruba: jet ski rentals, parasailing, tubing, and kayak tours. Compare options for kids and teens on Palm Beach and Eagle Beach.",
+    picks: [
+      {
+        slug: "aruba-jet-ski-rental",
+        tourCategorySlug: "water-sports-and-rentals-in-aruba",
+        whyWePickIt:
+          "Jet ski rentals along Palm Beach are a hit with teens and adventurous older kids. Double-seater Waverunners let a parent ride along. Sessions are short (30 min) so it fits easily into a beach day.",
+        bestFor: [
+          "Teens and older kids (check age limits)",
+          "Families who want a quick adrenaline activity between beach time",
+          "Parents riding along on a double jet ski",
+        ],
+      },
+      {
+        slug: "kayak-tour-seaglass-island",
+        tourCategorySlug: "sea-glass-island-aruba",
+        whyWePickIt:
+          "A kayak tour to Sea Glass Island is unique, photogenic, and suitable for families with older children who can paddle (or ride in a tandem). Calm morning tours are best for kids.",
+        bestFor: [
+          "Families with kids 10+ who can paddle or ride tandem",
+          "Anyone who wants a unique, off-the-beaten-path experience",
+          "Kids who love collecting colorful sea glass on the beach",
+        ],
+      },
+    ],
+    intro:
+      "Aruba's calm waters make it easy to add water activities to a family beach day. Jet skis and tubing suit teens; kayak tours to Sea Glass Island are a memorable half-day for older kids. Always check age and weight limits when booking.",
+    whatToExpect: [
+      "Check-in at the operator's beach kiosk or marina.",
+      "Safety briefing and equipment (life jacket, etc.).",
+      "Your session on the water — typically 15–30 minutes for jet skis, 2–3 hours for kayak tours.",
+      "Return to the start; total time from check-in is usually 30 minutes to 3 hours.",
+    ],
+    faqs: [
+      { question: "What water activities can kids do in Aruba?", answer: "Popular options for kids include jet ski rides (with a parent on doubles), tubing, parasailing (age/weight limits apply), and kayak tours to Sea Glass Island. Calm-water catamaran snorkel cruises are also great for younger children." },
+      { question: "Is jet ski rental in Aruba safe for teens?", answer: "Most operators require a valid driver's license to drive; teens can ride as passengers on double jet skis. Minimum age for drivers is typically 18. Check each listing for exact age and weight requirements." },
+    ],
+  },
 ];
+
+/** All category slugs that have at least one guide (including hub-only categories) */
+export function getAllGuideCategorySlugs(): string[] {
+  return Array.from(new Set(guides.map((g) => g.categorySlug)));
+}
 
 /** Get a guide by category slug and guide slug (e.g. "catamaran-cruises-in-aruba", "morning-cruises") */
 export function getGuide(categorySlug: string, guideSlug: string): GuidePage | null {

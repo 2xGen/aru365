@@ -189,6 +189,7 @@ export const catamaranListings: TourListing[] = [
     slug: "luxury-lagoon-cruise-chef-cocktails",
     productCode: "6593P7",
     operator: "Pelican Aruba",
+    seoTitle: "Luxury Lagoon Cruise in Aruba with Onboard Chef & Cocktails",
     angle: "Luxury option — onboard chef & signature cocktails",
     metaDescription: "Luxury lagoon cruise in Aruba with onboard chef, grilled lunch, signature cocktails and kayaks. Teak schooner along the south coast. Pelican Aruba. Book now.",
     intro: "The Luxury Lagoon Cruise stands out with an onboard chef grilling lunch, hand-crafted cocktails, and a teak schooner along Aruba’s south coast. Add snorkeling, kayaking, or rope swinging. Ideal for couples and small groups who want a premium, relaxed sail.",

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Aru365 – Tours and excursions in Aruba" }],
   },
+  alternates: { canonical: "https://aru365.com/2xgen" },
 };
 
 const platforms = [

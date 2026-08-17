@@ -4,7 +4,7 @@ import {
   categorySlugsWithListings,
   getTourListingsByCategory,
 } from "@/data/listings";
-import { getGuideSlugsByCategory } from "@/data/guides";
+import { getGuideSlugsByCategory, getAllGuideCategorySlugs } from "@/data/guides";
 
 const SITE_URL = "https://aru365.com";
 
@@ -64,9 +64,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const tourPages: MetadataRoute.Sitemap = [];
+  const tourPageSlugs = new Set<string>();
+
   for (const categorySlug of categorySlugsWithListings) {
     const listings = getTourListingsByCategory(categorySlug);
     for (const listing of listings) {
+      const key = `${categorySlug}/${listing.slug}`;
+      if (tourPageSlugs.has(key)) continue;
+      tourPageSlugs.add(key);
       tourPages.push({
         url: `${SITE_URL}/${categorySlug}/${listing.slug}`,
         lastModified: base,
@@ -74,8 +79,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
       });
     }
-    const guideSlugs = getGuideSlugsByCategory(categorySlug);
-    for (const guideSlug of guideSlugs) {
+  }
+
+  for (const categorySlug of getAllGuideCategorySlugs()) {
+    for (const guideSlug of getGuideSlugsByCategory(categorySlug)) {
+      const key = `${categorySlug}/${guideSlug}`;
+      if (tourPageSlugs.has(key)) continue;
+      tourPageSlugs.add(key);
       tourPages.push({
         url: `${SITE_URL}/${categorySlug}/${guideSlug}`,
         lastModified: base,

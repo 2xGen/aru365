@@ -55,6 +55,8 @@ export function TourListingTemplate({
 }: TourListingTemplateProps) {
   const itinerary = (viatorItinerary && viatorItinerary.length > 0 ? viatorItinerary : listing.itinerary) ?? [];
   const displayTitle = liveData?.title ?? listing.seoTitle ?? listing.angle;
+  const categoryLabel = categoryTitle.split("|")[0].trim();
+  const categorySlug = categoryHref.replace(/^\//, "");
   const hasRating = (liveData?.rating ?? 0) > 0;
   const hasReviews = (liveData?.reviewCount ?? 0) > 0;
   const priceDisplay = liveData?.fromPriceDisplay ?? "Price from (see options)";
@@ -138,9 +140,28 @@ export function TourListingTemplate({
       />
     ) : null;
 
+  const faqSchema =
+    listing.faqs && listing.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: listing.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: { "@type": "Answer", text: faq.answer },
+          })),
+        }
+      : null;
+
   return (
     <article className="min-h-screen bg-white">
       {productSchema}
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       {/* Floating sticky book button */}
       <div className="fixed bottom-6 right-6 z-40">
         <a
@@ -178,7 +199,7 @@ export function TourListingTemplate({
               {liveData?.imageUrl ? (
                 <img
                   src={liveData.imageUrl}
-                  alt=""
+                  alt={displayTitle}
                   className="h-full w-full object-cover"
                 />
               ) : (
@@ -192,7 +213,7 @@ export function TourListingTemplate({
 
             <div className="lg:col-span-3">
               <p className="text-aru-cyan font-medium text-sm uppercase tracking-widest">
-                {categoryTitle}
+                {categoryLabel}
               </p>
               <h1
                 className="mt-2 font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-slate-900 tracking-tight leading-tight"
@@ -383,7 +404,7 @@ export function TourListingTemplate({
                       {imageUrl ? (
                         <img
                           src={imageUrl}
-                          alt=""
+                          alt={title}
                           className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       ) : (
@@ -445,10 +466,16 @@ export function TourListingTemplate({
           </p>
           <Link
             href={categoryHref}
-            className="mt-8 inline-flex items-center gap-2 text-aru-cyan font-semibold hover:text-aru-cyan-dark transition-colors"
+            className="mt-4 inline-flex items-center gap-2 text-aru-cyan font-semibold hover:text-aru-cyan-dark transition-colors"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-            Back to {categoryTitle}
+            Back to {categoryLabel}
+          </Link>
+          <Link
+            href={`/tours-excursions?category=${encodeURIComponent(categorySlug)}`}
+            className="mt-3 block text-sm text-slate-500 hover:text-aru-cyan transition-colors"
+          >
+            Browse all {categoryLabel.toLowerCase()} →
           </Link>
         </div>
       </div>

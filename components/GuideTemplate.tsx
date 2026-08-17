@@ -36,12 +36,36 @@ export function GuideTemplate({
         }
       : null;
 
+  const siteOrigin = "https://aru365.com";
+  const itemListSchema =
+    picksWithTours.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          itemListElement: picksWithTours.map(({ pick, tour }, i) => {
+            const tourCat = pick.tourCategorySlug ?? categoryHref.replace(/^\//, "");
+            return {
+              "@type": "ListItem",
+              position: i + 1,
+              name: tour?.title ?? pick.slug,
+              url: `${siteOrigin}/${tourCat}/${pick.slug}`,
+            };
+          }),
+        }
+      : null;
+
   return (
     <article className="min-h-screen bg-white">
       {faqSchema && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+      {itemListSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
         />
       )}
       {/* Breadcrumbs */}
@@ -106,10 +130,13 @@ export function GuideTemplate({
               Our best {guide.title.replace(/^Best\s+/i, "").replace(/s\s*$/, "").toLowerCase()} picks
             </h2>
             <div className="space-y-12">
-              {picksWithTours.map(({ pick, tour }) => (
+              {picksWithTours.map(({ pick, tour }) => {
+                const tourCat = pick.tourCategorySlug ?? categoryHref.replace(/^\//, "");
+                const pickTitle = tour?.title ?? "View tour details";
+                return (
                 <Link
-                  key={pick.slug}
-                  href={`${categoryHref}/${pick.slug}`}
+                  key={`${tourCat}-${pick.slug}`}
+                  href={`/${tourCat}/${pick.slug}`}
                   className="group block rounded-2xl border-2 border-aru-orange/20 bg-white overflow-hidden transition-all duration-300 hover:border-aru-orange hover:shadow-xl hover:shadow-aru-orange/10"
                 >
                   <div className="flex flex-col sm:flex-row">
@@ -117,7 +144,7 @@ export function GuideTemplate({
                       {tour?.imageUrl ? (
                         <img
                           src={tour.imageUrl}
-                          alt=""
+                          alt={pickTitle}
                           className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       ) : (
@@ -165,7 +192,8 @@ export function GuideTemplate({
                     </div>
                   </div>
                 </Link>
-              ))}
+                );
+              })}
             </div>
           </section>
         </div>

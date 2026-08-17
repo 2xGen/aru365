@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   description:
     "Find and book the best tours in Aruba. Top picks: catamaran cruises, snorkeling, ATV, sunset sails. Compare prices and book with free cancellation.",
   openGraph: {
+    title: "Find & Book Best Tours in Aruba | Aru365",
+    description:
+      "Find and book the best tours in Aruba. Top picks: catamaran cruises, snorkeling, ATV, sunset sails. Compare prices and book with free cancellation.",
     url: `${SITE_URL}/best-tours-in-aruba`,
     images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Aru365 – Tours and excursions in Aruba" }],
   },
@@ -174,7 +177,7 @@ export default async function BestToursPage() {
                       {product.imageUrl ? (
                         <Image
                           src={product.imageUrl}
-                          alt=""
+                          alt={product.title}
                           width={400}
                           height={250}
                           className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"

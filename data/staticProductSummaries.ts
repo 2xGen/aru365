@@ -21,7 +21,7 @@ const generatedByCode = generatedStatic as Record<
 /** Manual image overrides when Viator dump/API omits imageUrl (key: categorySlug:productCode). */
 const imageOverridesByCategoryAndCode: Record<string, string> = {
   "sunset-and-dinner-cruises-in-aruba:8936P5":
-    "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/12/e7/8b/a3.jpg",
+    "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/11/d7/54/3b.jpg",
   "romantic-experiences-in-aruba:8936P5":
     "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/11/d7/54/3b.jpg",
   "atv-and-jeep-tours-in-aruba:137607P10":
@@ -146,11 +146,12 @@ const staticByCode: Record<
   },
   "8936P5": {
     title: "Aruba Sunset Sail – The Arusun Catamaran",
-    fromPriceDisplay: "Price from (see options)",
-    rating: 0,
-    reviewCount: 0,
+    fromPriceDisplay: "Price from $55",
+    rating: 4,
+    reviewCount: 5,
     imageUrl:
-      "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/12/e7/8b/a3.jpg",
+      "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/11/d7/54/3b.jpg",
+    freeCancellation: false,
   },
   "245508": {
     title: "Palm Pleasure Sunset Sail",
@@ -219,11 +220,12 @@ const staticByCode: Record<
   "6687ATV": { title: "Aruba ATV Tour", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
   "137607P10": {
     title: "Aruba ATV Tours Single and Double Seater 4-Hour Tour",
-    fromPriceDisplay: "Price from (see options)",
-    rating: 0,
-    reviewCount: 0,
+    fromPriceDisplay: "Price from $109",
+    rating: 4.8,
+    reviewCount: 976,
     imageUrl:
       "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/07/d7/71/89.jpg",
+    freeCancellation: false,
   },
   "47774P3": { title: "Aruba's Secret Beach and Cave Pool UTV and ATV Adventure", fromPriceDisplay: "Price from (see options)", rating: 0, reviewCount: 0, imageUrl: null },
   // Island sightseeing
@@ -254,11 +256,12 @@ const staticByCode: Record<
   "12431P5": { title: "Private Airport Transportation Services", fromPriceDisplay: "Price from $45", rating: 0, reviewCount: 0, imageUrl: null },
   "2455AUAAPTRND": {
     title: "Roundtrip Aruba Airport Transfer",
-    fromPriceDisplay: "Price from $75",
-    rating: 0,
-    reviewCount: 0,
+    fromPriceDisplay: "Price from $26",
+    rating: 4.5,
+    reviewCount: 931,
     imageUrl:
       "https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/07/b8/49/2a.jpg",
+    freeCancellation: false,
   },
   "332620P2": { title: "Private Transfers", fromPriceDisplay: "Price from $40", rating: 0, reviewCount: 0, imageUrl: null },
   "242476P1": { title: "AyCaramba Transfer and Private Tour Aruba", fromPriceDisplay: "Price from $120", rating: 0, reviewCount: 0, imageUrl: null },

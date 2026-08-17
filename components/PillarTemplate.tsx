@@ -145,7 +145,7 @@ export function PillarTemplate({ pillar, featuredProducts }: PillarTemplateProps
                       <>
                         <div className="aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-aru-cyan/20 to-aru-orange/20">
                           {p.imageUrl ? (
-                            <img src={p.imageUrl} alt="" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                            <img src={p.imageUrl} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" />
                           ) : (
                             <div className="h-full w-full flex items-center justify-center text-slate-400">
                               <svg className="w-16 h-16 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
@@ -238,7 +238,7 @@ export function PillarTemplate({ pillar, featuredProducts }: PillarTemplateProps
                     <>
                       <div className="aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-aru-cyan/10 to-aru-orange/10">
                         {p.imageUrl ? (
-                          <img src={p.imageUrl} alt="" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                          <img src={p.imageUrl} alt={p.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" />
                         ) : (
                           <div className="h-full w-full flex items-center justify-center text-slate-400">
                             <svg className="w-10 h-10 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>

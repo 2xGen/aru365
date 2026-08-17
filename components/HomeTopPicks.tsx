@@ -44,7 +44,7 @@ export function HomeTopPicks({ topPicks = [] }: Props) {
                   {tour.imageUrl ? (
                     <Image
                       src={tour.imageUrl}
-                      alt=""
+                      alt={tour.title}
                       width={400}
                       height={250}
                       className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
